@@ -18,10 +18,7 @@
 # limitations under the License.
 #
 
-if defined?(stackname).nil?
-  Chef::Log.warn('you did not set the stackname variable before running this')
-  stackname = 'not_a_stack'
-end
+stackname = node['stack-commons']['stackname']
 
 include_recipe 'chef-sugar'
 include_recipe 'platformstack::iptables'
