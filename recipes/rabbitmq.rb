@@ -19,7 +19,7 @@
 #
 
 if defined?(stackname).nil?
-  Chef::Application.warn!('you did not set the stackname variable before running this')
+  Chef::Log.warn('you did not set the stackname variable before running this')
   stackname = 'not_a_stack'
 end
 
