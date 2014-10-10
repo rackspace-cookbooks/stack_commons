@@ -1,6 +1,6 @@
 # Encoding: utf-8
 #
-# Cookbook Name:: phpstack
+# Cookbook Name:: stack-commons
 # Recipe:: rabbitmq
 #
 # Copyright 2014, Rackspace Hosting
@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-if nil?(defined?(stackname))
+if defined?(stackname).nil?
   Chef::Application.warn!('you did not set the stackname variable before running this')
   stackname = 'not_a_stack'
 end
