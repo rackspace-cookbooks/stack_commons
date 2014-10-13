@@ -43,7 +43,7 @@ suites:
         demo:
           enabled: true
 
-# tests those that consume via a wrapper recipe
-  - name: wrapper
+# tests those that consume via a wrapper recipe named 'default' because I have to
+  - name: default
     run_list:
       - recipe[wrapper::default]
