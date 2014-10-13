@@ -1,5 +1,5 @@
 # Encoding: utf-8
-name 'stack-commons'
+name 'stack_commons'
 maintainer 'Rackspace'
 maintainer_email 'rackspace-cookbooks@rackspace.com'
 license 'Apache 2.0'

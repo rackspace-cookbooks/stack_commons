@@ -1,6 +1,6 @@
 # Encoding: utf-8
 #
-# Cookbook Name:: stack-commons
+# Cookbook Name:: stack_commons
 # Recipe:: default
 #
 # Copyright 2014, Rackspace Hosting

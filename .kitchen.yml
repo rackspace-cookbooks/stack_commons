@@ -1,0 +1,49 @@
+---
+driver:
+  name: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+provisioner:
+  name: chef_zero
+  attributes:
+    authorization:
+      sudo:
+        users: ['vagrant']
+        passwordless: true
+    mysql:
+      server_root_password: "randompass"
+      server_repl_password: "randompass"
+      server_debian_password: "randompass"
+    holland:
+      password: "randompass"
+
+platforms:
+  - name: ubuntu-12.04
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-14.04
+    run_list:
+    - recipe[apt]
+  - name: centos-6.5
+    run_list:
+    - recipe[yum]
+  - name: centos-7.0
+    run_list:
+    - recipe[yum]
+
+suites:
+# tests those that consume via run lists
+  - name: runlist
+    run_list:
+      - recipe[stack_commons::rabbitmq]
+      - recipe[wrapper::demo]
+    attributes:
+      stack_commons:
+        demo:
+          enabled: true
+
+# tests those that consume via a wrapper recipe
+  - name: wrapper
+    run_list:
+      - recipe[wrapper::default]
