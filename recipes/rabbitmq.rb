@@ -20,6 +20,9 @@
 
 stackname = node['stack_commons']['stackname']
 
+# set demo attributes if needed
+node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
+
 include_recipe 'chef-sugar'
 include_recipe 'platformstack::iptables'
 
