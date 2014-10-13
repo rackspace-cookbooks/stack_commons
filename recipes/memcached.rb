@@ -1,9 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: default
+# Recipe:: memcached
 #
-# Copyright 2014, Rackspace, Inc.
+# Copyright 2014, Rackspace Hosting
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,4 @@
 # limitations under the License.
 #
 
-default['stack_commons']['stackname'] = 'stack_commons'
-
-# drives logging configurations for the shared functionality
-default['logstash_commons']['instance_name'] = 'agent'
-default['logstash_commons']['service_name'] = 'agent'
+include_recipe 'logstash_commons::memcached' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
