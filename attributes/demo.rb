@@ -1,7 +1,7 @@
+
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: default
 #
 # Copyright 2014, Rackspace, Inc.
 #
@@ -18,4 +18,20 @@
 # limitations under the License.
 #
 
-default['stack_commons']['stackname'] = 'stack_commons'
+default['stack_commons']['demo']['enabled'] = false
+default['stack_commons']['webserver'] = 'apache'
+
+site1 = 'example.com'
+site2 = 'test.com'
+port1 = '80'
+port2 = '8080'
+
+# just need to define the sites so they can be itterated over by things like mysql
+
+# apache site1
+default['stack_commons']['demo']['apache']['sites'][port1][site1]['foo'] = 'bar'
+default['stack_commons']['demo']['apache']['sites'][port2][site1]['foo'] = 'bar'
+
+# apache site2
+default['stack_commons']['demo']['apache']['sites'][port1][site2]['foo'] = 'bar'
+default['stack_commons']['demo']['apache']['sites'][port2][site2]['foo'] = 'bar'

@@ -1,6 +1,6 @@
 # Encoding: utf-8
 #
-# Cookbook Name:: stack-commons
+# Cookbook Name:: stack_commons
 # Recipe:: rabbitmq
 #
 # Copyright 2014, Rackspace Hosting
@@ -18,7 +18,10 @@
 # limitations under the License.
 #
 
-stackname = node['stack-commons']['stackname']
+stackname = node['stack_commons']['stackname']
+
+# set demo attributes if needed
+node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
 
 include_recipe 'chef-sugar'
 include_recipe 'platformstack::iptables'
