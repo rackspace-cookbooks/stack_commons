@@ -37,6 +37,7 @@ suites:
   - name: runlist
     run_list:
       - recipe[stack_commons::rabbitmq]
+      - recipe[stack_commons::varnish]
       - recipe[wrapper::demo]
     attributes:
       stack_commons:
