@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+default['platformstack']['cloud_monitoring']['plugins'] = {}
+
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['label'] = 'varnish'
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['disabled'] = true
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['period'] = 60
@@ -30,3 +32,16 @@ default['platformstack']['cloud_monitoring']['plugins']['varnish']['details']['t
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['alarm']['label'] = ''
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['alarm']['notification_plan_id'] = 'npMANAGED'
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['alarm']['criteria'] = ''
+
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['label'] = 'rabbitmq'
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['disabled'] = true
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['period'] = 60
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['timeout'] = 30
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['file_url'] = 'https://raw.githubusercontent.com/racker/rackspace-monitoring-agent-plugins-contrib/master/rabbitmq.py'
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['cookbook'] = 'platformstack'
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['details']['file'] = 'rabbitmq.py'
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['details']['args'] = []
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['details']['timeout'] = 60
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['alarm']['label'] = ''
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['alarm']['notification_plan_id'] = 'npMANAGED'
+default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['alarm']['criteria'] = ''
