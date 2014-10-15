@@ -18,4 +18,7 @@
 # limitations under the License.
 #
 
+include_recipe 'chef-sugar'
+include_recipe 'mongodb::mongodb_org_repo'
+include_recipe 'mongodb::default'
 include_recipe 'logstash_commons::mongodb' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
