@@ -26,7 +26,7 @@ describe 'stack_commons::mongodb_standalone' do
         end
 
         # context for elkstack logging enabled
-        context "with ELKstack logging enabled" do
+        context 'with ELKstack logging enabled' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
@@ -34,7 +34,7 @@ describe 'stack_commons::mongodb_standalone' do
               node.set['platformstack']['elkstack_logging']['enabled'] = true
             end.converge(described_recipe)
           end
-          it "includes logstash_commons::mongodb recipe" do
+          it 'includes logstash_commons::mongodb recipe' do
             expect(chef_run).to include_recipe('logstash_commons::mongodb')
           end
         end
@@ -43,5 +43,3 @@ describe 'stack_commons::mongodb_standalone' do
     end
   end
 end
-
-
