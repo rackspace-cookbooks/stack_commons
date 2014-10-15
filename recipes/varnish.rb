@@ -44,7 +44,7 @@ backend_hosts = {}
 if Chef::Config[:solo]
   Chef::Log.warn('This recipe uses search. Chef Solo does not support search.')
   # build a list of nodes from the backend_nodes attribute if we aren't doing search
-  backend_nodes = ({}).merge(node['phpstack']['varnish']['backend_nodes'] || {})
+  backend_nodes = ({}).merge(node[stackname]['varnish']['backend_nodes'] || {})
 else
   backend_nodes = search('node', "tags:#{stackname.gsub('stack', '')}_app_node AND chef_environment:#{node.chef_environment}")
   Chef::Log.warn('Search for varnish backend nodes returned no results, may be skipped...') if backend_nodes.nil? || backend_nodes.empty?
