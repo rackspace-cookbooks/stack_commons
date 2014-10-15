@@ -7,6 +7,7 @@
 #
 %w(
   stack_commons::rabbitmq
+  stack_commons::varnish
 ).each do |recipe|
   include_recipe recipe
 end
