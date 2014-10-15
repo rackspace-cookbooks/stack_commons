@@ -24,7 +24,9 @@ default['platformstack']['cloud_monitoring']['plugins']['varnish']['label'] = 'v
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['disabled'] = true
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['period'] = 60
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['timeout'] = 30
+# rubocop:disable LineLength
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['file_url'] = 'https://raw.githubusercontent.com/racker/rackspace-monitoring-agent-plugins-contrib/master/varnish.sh'
+# rubocop:enable LineLength
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['cookbook'] = 'platformstack'
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['details']['file'] = 'varnish.sh'
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['details']['args'] = []
@@ -37,7 +39,9 @@ default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['label'] = '
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['disabled'] = true
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['period'] = 60
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['timeout'] = 30
+# rubocop:disable LineLength
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['file_url'] = 'https://raw.githubusercontent.com/racker/rackspace-monitoring-agent-plugins-contrib/master/rabbitmq.py'
+# rubocop:enable LineLength
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['cookbook'] = 'platformstack'
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['details']['file'] = 'rabbitmq.py'
 default['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['details']['args'] = []
