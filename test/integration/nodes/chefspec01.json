@@ -6,7 +6,7 @@
     "hostname": "vagrant.vm",
     "ipaddress": "192.168.0.23",
     "recipes": [
-      "phpstack::mysql_master"
+      "stack_commons::mysql_master"
     ]
   },
   "normal": {
