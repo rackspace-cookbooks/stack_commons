@@ -1,0 +1,11 @@
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+
+[Service]
+Type=forking
+User=mongod
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongodb.conf
+
+[Install]
+WantedBy=multi-user.target

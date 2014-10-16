@@ -18,6 +18,16 @@
 # limitations under the License.
 #
 
+cookbook_file 'systemd service file' do
+  path '/usr/lib/systemd/system/mongod.service'
+  source 'mongod.service'
+  owner 'root'
+  group 'root'
+  mode 0644
+  action 'create'
+  only_if { node['init_package'] == 'systemd' }
+end
+
 include_recipe 'chef-sugar'
 include_recipe 'mongodb::mongodb_org_repo'
 include_recipe 'mongodb::default'
