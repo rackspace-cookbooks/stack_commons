@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-include_recipe 'phpstack::postgresql_base'
+include_recipe 'stack_commons::postgresql_base'
 include_recipe 'pg-multi::pg_master'
 include_recipe 'platformstack::iptables'
 

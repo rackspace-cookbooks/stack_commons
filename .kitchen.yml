@@ -36,6 +36,7 @@ suites:
 # tests those that consume via run lists
   - name: runlist
     run_list:
+      - recipe[stack_commons::postgresql_base]
       - recipe[stack_commons::rabbitmq]
       - recipe[stack_commons::varnish]
       - recipe[wrapper::demo]
