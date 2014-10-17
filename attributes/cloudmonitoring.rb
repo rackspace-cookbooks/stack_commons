@@ -18,6 +18,13 @@
 # limitations under the License.
 #
 
+default['stack_commons']['cloud_monitoring']['agent_mysql']['disabled'] = false
+default['stack_commons']['cloud_monitoring']['agent_mysql']['alarm'] = false
+default['stack_commons']['cloud_monitoring']['agent_mysql']['period'] = 60
+default['stack_commons']['cloud_monitoring']['agent_mysql']['timeout'] = 15
+default['stack_commons']['cloud_monitoring']['agent_mysql']['user'] = 'raxmon-agent'
+default['stack_commons']['cloud_monitoring']['agent_mysql']['password'] = nil
+
 default['platformstack']['cloud_monitoring']['plugins'] = {}
 
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['label'] = 'varnish'
