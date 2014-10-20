@@ -1,9 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: apache
+# Recipe:: redis_master
 #
-# Copyright 2014, Rackspace Hosting
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,4 +18,5 @@
 # limitations under the License.
 #
 
-include_recipe 'logstash_commons::apache' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002
+include_recipe 'redis-multi::master'
+include_recipe 'stack_commons::redis_base'
