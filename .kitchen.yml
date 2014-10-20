@@ -28,9 +28,11 @@ platforms:
   - name: centos-6.5
     run_list:
     - recipe[yum]
-  - name: centos-7.0
-    run_list:
-    - recipe[yum]
+
+# out of scope for de-dupe effort, and broken too
+# - name: centos-7.0
+#   run_list:
+#   - recipe[yum]
 
 suites:
 # tests those that consume via run lists
