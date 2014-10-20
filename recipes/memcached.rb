@@ -17,5 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe 'chef-sugar'
+include_recipe 'apt' if platform_family?('debian')
+include_recipe 'memcached'
 
 include_recipe 'logstash_commons::memcached' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
