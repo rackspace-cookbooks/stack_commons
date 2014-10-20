@@ -22,3 +22,4 @@ include_recipe 'apt' if platform_family?('debian')
 include_recipe 'memcached'
 
 include_recipe 'logstash_commons::memcached' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002
+node.set['platformstack']['cloud_monitoring']['plugins']['memcached']['disabled'] = false
