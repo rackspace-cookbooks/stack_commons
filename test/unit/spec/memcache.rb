@@ -2,8 +2,6 @@
 
 require_relative 'spec_helper'
 
-# this will pass on stack_commons, fail elsewhere, forcing you to
-# write those chefspec tests you always were avoiding
 describe 'stack_commons::memcached' do
   before { stub_resources }
   supported_platforms.each do |platform, versions|
