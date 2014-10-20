@@ -18,6 +18,7 @@
 # limitations under the License.
 #
 
+<<<<<<< HEAD
 include_recipe 'chef-sugar'
 include_recipe 'platformstack::monitors'
 include_recipe 'pg-multi'
@@ -49,3 +50,6 @@ template '/etc/rackspace-monitoring-agent.conf.d/pg-monitor.yaml' do
   action :create
   only_if { node.deep_fetch('platformstack', 'cloud_monitoring', 'enabled') }
 end
+=======
+include_recipe 'logstash_commons::postgresql' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002
+>>>>>>> master

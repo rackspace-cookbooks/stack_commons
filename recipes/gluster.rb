@@ -18,4 +18,4 @@
 # limitations under the License.
 #
 
-include_recipe 'logstash_commons::gluster' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
+include_recipe 'logstash_commons::gluster' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002

@@ -5,14 +5,14 @@
   "automatic": {
     "hostname": "vagrant.vm",
     "recipes": [
-      "stack_commons::application_php"
+      "stack_commons::default"
     ],
     "roles": [
     ],
     "ipaddress": "192.168.0.52"
   },
   "tags": [
-    "php_app_node"
+    "generic_app_node"
   ],
   "normal": {
   },
@@ -42,6 +42,6 @@
   "override": {
   },
   "run_list": [
-    "recipe[stack_commons::application_php]"
+    "recipe[stack_commons::default]"
   ]
 }
