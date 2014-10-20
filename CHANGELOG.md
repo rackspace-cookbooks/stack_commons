@@ -3,6 +3,11 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.7
+-----
+
+- @martinb3 - Added redis
+
 0.0.6
 -----
 - [Julien Berard] - Added memcached
