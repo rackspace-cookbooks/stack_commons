@@ -17,3 +17,4 @@ default['redisio']['sentinels'] << { 'name' => '6381-sentinel',
                                      'master_port' => 6379 }
 
 default['redis-multi']['sentinel_port'] = 6381
+default['redis-multi']['redis_master'] = 'localhost'
