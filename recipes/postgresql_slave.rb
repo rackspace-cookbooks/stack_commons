@@ -1,7 +1,7 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: postgresql_base
+# Recipe:: postgresql_slave
 #
 # Copyright 2014, Rackspace Hosting
 #
@@ -18,7 +18,8 @@
 # limitations under the License.
 #
 
-include_recipe 'chef-sugar'
-include_recipe 'platformstack::monitors'
-include_recipe 'pg-multi'
-include_recipe 'logstash_commons::postgresql' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
+include_recipe 'stack_commons::postgresql_base'
+include_recipe 'pg-multi::pg_slave'
+include_recipe 'platformstack::iptables'
+
+add_iptables_rule('INPUT', "-p tcp --dport #{node['postgresql']['config']['port']} -s #{node['pg-multi']['master_ip']} -j ACCEPT", 9243, 'allow master to connect to slaves')
