@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.9
+-----
+- @jujugrrr - Removed systemd workaround as we don't support Centos7 anymore
+
 0.0.8
 -----
 
@@ -20,7 +24,6 @@ ERROR: Error uploading cookbook stack_commons to the Opscode Cookbook Site: pars
 
 0.0.7
 -----
-
 - @martinb3 - Added redis
 
 0.0.6
