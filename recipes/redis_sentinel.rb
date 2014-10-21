@@ -1,9 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: redis_base
+# Recipe:: redis_sentinel
 #
-# Copyright 2014, Rackspace Hosting
+# Copyright 2014, Rackspace US, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,9 @@
 
 stackname = node['stack_commons']['stackname']
 
-include_recipe 'redis-multi'
-include_recipe 'redis-multi::enable'
+include_recipe 'redis-multi::sentinel'
+include_recipe 'redis-multi::sentinel_default'
+include_recipe 'redis-multi::sentinel_enable'
 
 # allow app nodes to connect
 search_add_iptables_rules("tags:#{stackname.gsub('stack', '')}_app_node AND chef_environment:#{node.chef_environment}",
@@ -31,10 +32,15 @@ search_add_iptables_rules("tags:#{stackname.gsub('stack', '')}_app_node AND chef
                           'Open port for redis from app')
 
 # allow redis to connect to eachother
+search_add_iptables_rules("tags:#{stackname}-redis_sentinel AND chef_environment:#{node.chef_environment}",
+                          'INPUT',
+                          "-m tcp -p tcp --dport #{node['redis-multi']['sentinel_port']} -j ACCEPT",
+                          9999,
+                          'Open port for redis to redis for sentinel')
 search_add_iptables_rules("tags:#{stackname}-redis AND chef_environment:#{node.chef_environment}",
                           'INPUT',
                           "-m tcp -p tcp --dport #{node['redis-multi']['bind_port']} -j ACCEPT",
                           9999,
                           'Open port for redis to redis')
 
-include_recipe 'logstash_commons::redis' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
+tag("#{stackname}-redis_sentinel")

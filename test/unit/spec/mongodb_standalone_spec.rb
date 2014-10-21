@@ -11,7 +11,7 @@ describe 'stack_commons::mongodb_standalone' do
       # Context for each platform
       context "on #{platform.capitalize} #{version}" do
         let(:chef_run) do
-          ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
+          ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
             node_resources(node)
           end.converge(described_recipe)
         end
@@ -28,7 +28,7 @@ describe 'stack_commons::mongodb_standalone' do
         # context for elkstack logging enabled
         context 'with ELKstack logging enabled' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
+            ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
               node_resources(node)
               node.set['logstash_commons']['restart_service'] = false # need logstash cookbook to do this
               node.set['platformstack']['elkstack_logging']['enabled'] = true
