@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.6
+-----
+- [Julien Berard] - Added memcached
+
 0.0.3
 -----
 - [Julien Berard] - Added mongodb_standalone
