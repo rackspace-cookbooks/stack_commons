@@ -21,7 +21,6 @@
 default['stack_commons']['stackname'] = 'stack_commons'
 
 default['stack_commons']['mysql']['databases'] = {}
-default['stack_commons']['varnish']['backend_nodes'] = {}
 default['stack_commons']['rabbitmq']['passwords'] = {}
 
 default['stack_commons']['db-autocreate']['enabled'] = true
