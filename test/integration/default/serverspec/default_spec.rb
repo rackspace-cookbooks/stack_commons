@@ -43,18 +43,12 @@ if os[:family] == 'redhat'
     it { should be_running }
   end
   # service is named postgresql...
-  describe service('postgresql') do
+  describe service('postgresql-9.3') do
     it { should be_enabled }
-  end
-  describe service('postgres') do
-    it { should be_running }
   end
 else
   describe service('postgresql') do
     it { should be_enabled }
-    it { should be_running }
-  end
-  describe service('postgresql') do
     it { should be_running }
   end
 end
