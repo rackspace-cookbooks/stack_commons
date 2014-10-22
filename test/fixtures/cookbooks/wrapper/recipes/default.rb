@@ -7,7 +7,7 @@
 #
 %w(
   stack_commons::mysql_master
-  stack_commons::postgresql_master
+  stack_commons::postgresql_base
   stack_commons::mongodb_standalone
   stack_commons::memcached
   stack_commons::rabbitmq
