@@ -15,6 +15,10 @@ provisioner:
       server_root_password: "randompass"
       server_repl_password: "randompass"
       server_debian_password: "randompass"
+    postgresql:
+      version: '9.3'
+      enable_pgdg_apt: true
+      enable_pgdg_yum: true
     holland:
       password: "randompass"
 
