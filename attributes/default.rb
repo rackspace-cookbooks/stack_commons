@@ -25,3 +25,12 @@ default['stack_commons']['rabbitmq']['passwords'] = {}
 
 default['stack_commons']['db-autocreate']['enabled'] = true
 default['stack_commons']['varnish']['multi'] = true
+
+default['disk']['name'] = '/dev/xvde1'
+default['disk']['fs'] = 'ext4'
+
+default['holland']['enabled'] = false
+default['holland']['password'] = 'notagudpassword'
+default['holland']['cron']['day'] = '*'
+default['holland']['cron']['hour'] = '3'
+default['holland']['cron']['minute'] = '12'
