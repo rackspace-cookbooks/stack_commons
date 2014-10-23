@@ -18,4 +18,7 @@
 # limitations under the License.
 #
 
-include_recipe 'logstash_commons::postgresql' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002
+include_recipe 'chef-sugar'
+include_recipe 'platformstack::monitors'
+include_recipe 'pg-multi'
+include_recipe 'logstash_commons::postgresql' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')

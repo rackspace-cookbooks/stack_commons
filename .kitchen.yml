@@ -15,6 +15,10 @@ provisioner:
       server_root_password: "randompass"
       server_repl_password: "randompass"
       server_debian_password: "randompass"
+    postgresql:
+      version: '9.3'
+      enable_pgdg_apt: true
+      enable_pgdg_yum: true
     holland:
       password: "randompass"
 
@@ -35,62 +39,6 @@ platforms:
 #    - recipe[yum]
 
 suites:
-# tests those that consume via run lists
-  - name: runlist
-    run_list:
-      - recipe[stack_commons::rabbitmq]
-      - recipe[stack_commons::varnish]
-      - recipe[stack_commons::redis_master]
-      - recipe[stack_commons::redis_slave]
-      - recipe[stack_commons::redis_sentinel]
-      - recipe[wrapper::demo]
-    attributes:
-      stack_commons:
-        demo:
-          enabled: true
-      redis-multi:
-        redis_master: 'localhost'
-      redisio:
-        servers:
-          - # just do this statically, these don't normally run on the same box
-            name: "6379-master"
-            port: 6379
-          -
-            name: "6380-slave"
-            port: 6380
-            slaveof:
-              address: 'localhost'
-              port: 6379
-        sentinels:
-          -
-            name: "6381-sentinel"
-            sentinel_port: 6381
-            master_ip: 'localhost'
-            master_port: 6379
-
-  - name: runlist_mongodb_standalone
-    run_list:
-      - recipe[stack_commons::mongodb_standalone]
-      - recipe[wrapper::demo]
-    attributes:
-      stack_commons:
-        demo:
-          enabled: true
-  - name: runlist_memcached
-    run_list:
-      - recipe[stack_commons::memcached]
-      - recipe[wrapper::demo]
-    attributes:
-      stack_commons:
-        demo:
-          enabled: true
-# tests those that consume via a wrapper recipe named 'default' because I have to
   - name: default
     run_list:
       - recipe[wrapper::default]
-  - name: wrapper_mongodb_standalone
-    run_list:
-      - recipe[wrapper::mongodb_standalone]
-  - name: wrapper_memcached
-    run_list:
-      - recipe[wrapper::memcached]

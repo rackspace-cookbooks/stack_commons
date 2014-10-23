@@ -1,9 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: default
+# Recipe:: mysql_master
 #
-# Copyright 2014, Rackspace, Inc.
+# Copyright 2014, Rackspace Hosting
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,14 +18,11 @@
 # limitations under the License.
 #
 
-default['stack_commons']['stackname'] = 'stack_commons'
+include_recipe 'stack_commons::mysql_base'
+include_recipe 'mysql-multi::mysql_master'
+include_recipe 'platformstack::iptables'
 
-default['stack_commons']['mysql']['databases'] = {}
-default['stack_commons']['rabbitmq']['passwords'] = {}
-
-default['stack_commons']['db-autocreate']['enabled'] = true
-default['stack_commons']['varnish']['multi'] = true
-
-# drives logging configurations for the shared functionality
-default['logstash_commons']['instance_name'] = 'agent'
-default['logstash_commons']['service_name'] = 'agent'
+node['mysql-multi']['slaves'].each do |slave|
+  next if slave.nil?
+  add_iptables_rule('INPUT', "-p tcp --dport #{node['mysql']['port']} -s #{slave} -j ACCEPT", 9243, 'allow slaves to connect to master')
+end

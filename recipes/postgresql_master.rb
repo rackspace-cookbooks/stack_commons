@@ -1,9 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: stack_commons
-# Recipe:: default
+# Recipe:: postgresql_master
 #
-# Copyright 2014, Rackspace, Inc.
+# Copyright 2014, Rackspace Hosting
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,14 +18,10 @@
 # limitations under the License.
 #
 
-default['stack_commons']['stackname'] = 'stack_commons'
+include_recipe 'stack_commons::postgresql_base'
+include_recipe 'pg-multi::pg_master'
+include_recipe 'platformstack::iptables'
 
-default['stack_commons']['mysql']['databases'] = {}
-default['stack_commons']['rabbitmq']['passwords'] = {}
-
-default['stack_commons']['db-autocreate']['enabled'] = true
-default['stack_commons']['varnish']['multi'] = true
-
-# drives logging configurations for the shared functionality
-default['logstash_commons']['instance_name'] = 'agent'
-default['logstash_commons']['service_name'] = 'agent'
+node['pg-multi']['slave_ip'].each do |slave|
+  add_iptables_rule('INPUT', "-p tcp --dport #{node['postgresql']['config']['port']} -s #{slave} -j ACCEPT", 9243, 'allow slaves to connect to master')
+end
