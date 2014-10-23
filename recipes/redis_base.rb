@@ -36,5 +36,3 @@ search_add_iptables_rules("tags:#{stackname}-redis AND chef_environment:#{node.c
                           "-m tcp -p tcp --dport #{node['redis-multi']['bind_port']} -j ACCEPT",
                           9999,
                           'Open port for redis to redis')
-
-include_recipe 'logstash_commons::redis' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')

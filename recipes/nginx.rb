@@ -17,5 +17,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-include_recipe 'logstash_commons::nginx' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002
