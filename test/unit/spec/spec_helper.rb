@@ -15,6 +15,10 @@ Dir['./test/unit/spec/support/**/*.rb'].sort.each { |f| require f }
 def node_resources(node)
   node.automatic['example']['attribute'] = 'lions, tigers and bears!'
 
+  # newrelic
+  node.set['newrelic']['license'] = 'mylicence'
+
+  # redis
   node.default_unless['redisio']['servers'] = []
   node.default['redisio']['servers'] << { 'name' => '6379-sentinel',
                                           'port' => 6379 }
