@@ -25,7 +25,3 @@ default['stack_commons']['rabbitmq']['passwords'] = {}
 
 default['stack_commons']['db-autocreate']['enabled'] = true
 default['stack_commons']['varnish']['multi'] = true
-
-# drives logging configurations for the shared functionality
-default['logstash_commons']['instance_name'] = 'agent'
-default['logstash_commons']['service_name'] = 'agent'

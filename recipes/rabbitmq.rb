@@ -73,4 +73,3 @@ end
 
 # set the best ip to reach rabbit at for searching
 node.default[stackname]['rabbitmq']['best_ip_for'] = best_ip_for(node)
-include_recipe 'logstash_commons::rabbitmq' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')

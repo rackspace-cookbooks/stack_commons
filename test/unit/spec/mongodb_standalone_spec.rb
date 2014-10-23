@@ -21,24 +21,6 @@ describe 'stack_commons::mongodb_standalone' do
             expect(chef_run).to include_recipe(recipe)
           end
         end
-        it "doesn\'t include logstash_commons::mongodb recipe" do
-          expect(chef_run).to_not include_recipe('logstash_commons::mongodb')
-        end
-
-        # context for elkstack logging enabled
-        context 'with ELKstack logging enabled' do
-          let(:chef_run) do
-            ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
-              node_resources(node)
-              node.set['logstash_commons']['restart_service'] = false # need logstash cookbook to do this
-              node.set['platformstack']['elkstack_logging']['enabled'] = true
-            end.converge(described_recipe)
-          end
-          it 'includes logstash_commons::mongodb recipe' do
-            expect(chef_run).to include_recipe('logstash_commons::mongodb')
-          end
-        end
-
       end
     end
   end

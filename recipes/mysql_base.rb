@@ -166,4 +166,3 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
     end
   end
 end
-include_recipe 'logstash_commons::mysql' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled') # ~RACK002

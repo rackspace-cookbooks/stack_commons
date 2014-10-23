@@ -1,0 +1,18 @@
+input {
+  file {
+    path => "<%= @path %>"
+    type => "rabbitmq"
+  }
+}
+
+filter {
+  if [type] == "rabbitmq" {
+    if [path] =~ "log" {
+      mutate { replace => { type => "rabbitmq_log" } }
+    } else if [path] =~ "_err" {
+      mutate { replace => { type => "rabbitmq_err" } }
+    } else {
+      mutate { replace => { type => "rabbitmq_other" } }
+    }
+  }
+}

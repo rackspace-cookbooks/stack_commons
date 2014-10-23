@@ -77,5 +77,3 @@ else
   node.default['varnish']['vcl_source'] = 'varnish-default-vcl.erb' if node[stackname]['varnish']['multi']
 end
 include_recipe 'varnish::default'
-
-include_recipe 'logstash_commons::varnish' if node.deep_fetch('platformstack', 'elkstack_logging', 'enabled')
