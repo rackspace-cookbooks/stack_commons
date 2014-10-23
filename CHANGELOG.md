@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.11
+-----
+- @jujugrrr - Added newrelic recipe
+
 0.0.9
 -----
 - @jujugrrr - Removed systemd workaround as we don't support Centos7 anymore
