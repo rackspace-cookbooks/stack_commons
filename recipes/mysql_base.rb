@@ -30,7 +30,7 @@ node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]
 
 # set passwords dynamically...
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
-node.set_unless[stackname]['cloud_monitoring']['agent_mysql']['password'] = secure_password
+node.set_unless['stack_commons']['cloud_monitoring']['agent_mysql']['password'] = secure_password
 if node['mysql']['server_root_password'] == 'ilikerandompasswords'
   node.set['mysql']['server_root_password'] = secure_password
 end
@@ -59,9 +59,9 @@ mysql_database_user 'holland' do
   only_if { node.deep_fetch('holland', 'enabled') }
 end
 
-mysql_database_user node[stackname]['cloud_monitoring']['agent_mysql']['user'] do
+mysql_database_user node['stack_commons']['cloud_monitoring']['agent_mysql']['user'] do
   connection connection_info
-  password node[stackname]['cloud_monitoring']['agent_mysql']['password']
+  password node['stack_commons']['cloud_monitoring']['agent_mysql']['password']
   action 'create'
   only_if { node.deep_fetch('platformstack', 'cloud_monitoring', 'enabled') }
 end
