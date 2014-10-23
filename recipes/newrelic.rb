@@ -35,7 +35,6 @@ if node['newrelic']['license']
     node.default['newrelic']['php_agent']['config_file'] = "#{node['php']['ext_conf_dir']}/newrelic.ini"
     include_recipe 'newrelic::php_agent'
   when 'pythonstack'
-    include_recipe 'platformstack::default'
     include_recipe 'newrelic::python_agent'
     include_recipe 'python'
     include_recipe 'python::pip'
