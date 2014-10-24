@@ -18,10 +18,10 @@
 # limitations under the License.
 #
 
+stackname = node['stack_commons']['stackname']
 include_recipe 'chef-sugar'
 
 cluster = node['rackspace_gluster']['config']['server']['glusters'].values[0]
-
 # set the replica count to the number of gluster nodes
 if cluster['nodes'].values.count == 2
   replica_count = 2
