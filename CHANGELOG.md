@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.16
+------
+- @cybermerc  - Added glusterfs
+
 0.0.15
 ------
 - @jujugrrr - Fixed missing monitoring #26
