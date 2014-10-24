@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.15
+------
+- @jujugrrr - Fixed missing monitoring #26
+
 0.0.12
 ------
 - @martinb3 - Migrated the `logstash_commons` calls to use attributes on elkstack instead. Added tests to verify the templates are pushed out successfully when converged with elkstack::agent in a wrapper recipe.
