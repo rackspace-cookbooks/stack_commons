@@ -60,20 +60,18 @@ if node['newrelic']['license']
 
   if node.recipe?('rabbitmq::default')
     # needs to be run before hand to set attributes (port specifically)
-    include_recipe "#{stackname}::rabbitmq"
     meetme_config['rabbitmq'] = {
       'name' => node['hostname'],
       'host' => 'localhost',
       'port' => node['rabbitmq']['port'],
       'username' => 'monitor',
-      'password' => node[stackname]['rabbitmq']['monitor_password'],
+      'password' => node['stack_commons']['rabbitmq']['monitor_password'],
       'api_path' => '/api'
     }
   end
 
   if node.recipe?('nginx::default')
     template 'nginx-monitor' do
-      cookbook stackname
       source 'nginx/sites/monitor.erb'
       path "#{node['nginx']['dir']}/sites-available/monitor.conf"
       owner 'root'
@@ -82,7 +80,7 @@ if node['newrelic']['license']
       notifies :reload, 'service[nginx]'
     end
 
-    nginx_site 'monitor' do
+    nginx_site 'monitor.conf' do
       enable true
       notifies :reload, 'service[nginx]'
     end
@@ -93,11 +91,13 @@ if node['newrelic']['license']
       'port' => node['nginx']['status']['port'],
       'path' => '/server-status'
     }
-    meetme_config['uwsgi'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => node['nginx']['sites'].values[0]['uwsgi_port']
-    }
+    if stackname == 'pythonstack'
+      meetme_config['uwsgi'] = {
+        'name' => node['hostname'],
+        'host' => 'localhost',
+        'port' => node[stackname]['nginx']['sites'].values[0]['uwsgi_port']
+      }
+    end
   end
 
   if node.recipe?('redisio::enable')
