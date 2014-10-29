@@ -62,12 +62,12 @@ if node['newrelic']['license']
     # needs to be run before hand to set attributes (port specifically)
     include_recipe "#{stackname}::rabbitmq"
     meetme_config['rabbitmq'] = {
-      name: node['hostname'],
-      host: 'localhost',
-      port: node['rabbitmq']['port'],
-      username: 'monitor',
-      password: node[stackname]['rabbitmq']['monitor_password'],
-      api_path: '/api'
+      'name' => node['hostname'],
+      'host' => 'localhost',
+      'port' => node['rabbitmq']['port'],
+      'username' => 'monitor',
+      'password' => node[stackname]['rabbitmq']['monitor_password'],
+      'api_path' => '/api'
     }
   end
 
@@ -99,6 +99,15 @@ if node['newrelic']['license']
       'port' => node['nginx']['sites'].values[0]['uwsgi_port']
     }
   end
+
+  if node.recipe?('redisio::enable')
+    meetme_config['redis'] = {
+      'name' => node['hostname'],
+      'host' => 'localhost',
+      'port' => node['redis-multi']['bind_port']
+    }
+  end
+
   node.override['newrelic_meetme_plugin']['services'] = meetme_config
   node.default['newrelic_meetme_plugin']['package_name'] = 'newrelic-plugin-agent'
 
