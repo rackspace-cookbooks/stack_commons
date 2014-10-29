@@ -50,7 +50,7 @@ if node['newrelic']['license']
 
   # Meetme
   meetme_config = {}
-  if node['recipes'].include?('memcached')
+  if node.recipe?('memcached::default')
     meetme_config['memcached'] = {
       'name' => node['hostname'],
       'host' => 'localhost',
@@ -58,7 +58,7 @@ if node['newrelic']['license']
     }
   end
 
-  if node['recipes'].include?('rabbitmq')
+  if node.recipe?('rabbitmq::default')
     # needs to be run before hand to set attributes (port specifically)
     include_recipe "#{stackname}::rabbitmq"
     meetme_config['rabbitmq'] = {
@@ -71,7 +71,7 @@ if node['newrelic']['license']
     }
   end
 
-  if node['recipes'].include?('nginx')
+  if node.recipe?('nginx::default')
     template 'nginx-monitor' do
       cookbook stackname
       source 'nginx/sites/monitor.erb'
