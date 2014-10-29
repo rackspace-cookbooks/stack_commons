@@ -3,9 +3,13 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.19
+------
+- @seeafish - Added redis meetme functionality and cleaned up newrelic in general by removing refs to stackname and updating recipe inclusion checks.
+
 0.0.16
 ------
-- @cybermerc  - Added glusterfs
+- @cybermerc - Added glusterfs
 
 0.0.15
 ------
