@@ -52,21 +52,21 @@ if node['newrelic']['license']
   meetme_config = {}
   if node.recipe?('memcached::default')
     meetme_config['memcached'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => 11_211
+      name: node['hostname'],
+      host: 'localhost',
+      port: 11_211
     }
   end
 
   if node.recipe?('rabbitmq::default')
     # needs to be run before hand to set attributes (port specifically)
     meetme_config['rabbitmq'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => node['rabbitmq']['port'],
-      'username' => 'monitor',
-      'password' => node['stack_commons']['rabbitmq']['monitor_password'],
-      'api_path' => '/api'
+      name: node['hostname'],
+      host: 'localhost',
+      port: node['rabbitmq']['port'],
+      username: 'monitor',
+      password: node['stack_commons']['rabbitmq']['monitor_password'],
+      api_path: '/api'
     }
   end
 
@@ -86,25 +86,25 @@ if node['newrelic']['license']
     end
 
     meetme_config['nginx'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => node['nginx']['status']['port'],
-      'path' => '/server-status'
+      name: node['hostname'],
+      host: 'localhost',
+      port: node['nginx']['status']['port'],
+      path: '/server-status'
     }
-    if stackname == 'pythonstack'
+    if node.recipe?('uwsgi::default')
       meetme_config['uwsgi'] = {
-        'name' => node['hostname'],
-        'host' => 'localhost',
-        'port' => node[stackname]['nginx']['sites'].values[0]['uwsgi_port']
+        name: node['hostname'],
+        host: 'localhost',
+        port: node[stackname]['nginx']['sites'].values[0]['uwsgi_port']
       }
     end
   end
 
   if node.recipe?('redisio::enable')
     meetme_config['redis'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => node['redis-multi']['bind_port']
+      name: node['hostname'],
+      host: 'localhost',
+      port: node['redis-multi']['bind_port']
     }
   end
 
