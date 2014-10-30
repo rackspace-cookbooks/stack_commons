@@ -50,30 +50,28 @@ if node['newrelic']['license']
 
   # Meetme
   meetme_config = {}
-  if node['recipes'].include?('memcached')
+  if node.recipe?('memcached::default')
     meetme_config['memcached'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => 11_211
+      name: node['hostname'],
+      host: 'localhost',
+      port: 11_211
     }
   end
 
-  if node['recipes'].include?('rabbitmq')
+  if node.recipe?('rabbitmq::default')
     # needs to be run before hand to set attributes (port specifically)
-    include_recipe "#{stackname}::rabbitmq"
     meetme_config['rabbitmq'] = {
       name: node['hostname'],
       host: 'localhost',
       port: node['rabbitmq']['port'],
       username: 'monitor',
-      password: node[stackname]['rabbitmq']['monitor_password'],
+      password: node['stack_commons']['rabbitmq']['monitor_password'],
       api_path: '/api'
     }
   end
 
-  if node['recipes'].include?('nginx')
+  if node.recipe?('nginx::default')
     template 'nginx-monitor' do
-      cookbook stackname
       source 'nginx/sites/monitor.erb'
       path "#{node['nginx']['dir']}/sites-available/monitor.conf"
       owner 'root'
@@ -82,23 +80,34 @@ if node['newrelic']['license']
       notifies :reload, 'service[nginx]'
     end
 
-    nginx_site 'monitor' do
+    nginx_site 'monitor.conf' do
       enable true
       notifies :reload, 'service[nginx]'
     end
 
     meetme_config['nginx'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => node['nginx']['status']['port'],
-      'path' => '/server-status'
+      name: node['hostname'],
+      host: 'localhost',
+      port: node['nginx']['status']['port'],
+      path: '/server-status'
     }
-    meetme_config['uwsgi'] = {
-      'name' => node['hostname'],
-      'host' => 'localhost',
-      'port' => node['nginx']['sites'].values[0]['uwsgi_port']
+    if node.recipe?('uwsgi::default')
+      meetme_config['uwsgi'] = {
+        name: node['hostname'],
+        host: 'localhost',
+        port: node[stackname]['nginx']['sites'].values[0]['uwsgi_port']
+      }
+    end
+  end
+
+  if node.recipe?('redisio::enable')
+    meetme_config['redis'] = {
+      name: node['hostname'],
+      host: 'localhost',
+      port: node['redis-multi']['bind_port']
     }
   end
+
   node.override['newrelic_meetme_plugin']['services'] = meetme_config
   node.default['newrelic_meetme_plugin']['package_name'] = 'newrelic-plugin-agent'
 
