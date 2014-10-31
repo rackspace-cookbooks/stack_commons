@@ -11,7 +11,7 @@ Dir['./test/unit/spec/support/**/*.rb'].sort.each { |f| require f }
 ::CHEFSPEC_OPTS = {
   log_level: ::LOG_LEVEL
 }
-
+# rubocop:disable AbcSize
 def node_resources(node)
   node.automatic['example']['attribute'] = 'lions, tigers and bears!'
 
@@ -37,6 +37,7 @@ def node_resources(node)
                                             'master_ip' => 'localhost',
                                             'master_port' => 6379 }
 end
+# rubocop:enable AbcSize
 
 def stub_resources
   stub_command('which sudo').and_return('/usr/bin/sudo')
