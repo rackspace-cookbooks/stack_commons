@@ -72,6 +72,39 @@ describe 'stack_commons::newrelic' do
             expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('memcached')
           end
         end
+        context 'mysql' do
+          let(:chef_run) do
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+              node_resources(node)
+            end.converge('stack_commons::mysql_base', described_recipe)
+          end
+          it 'includes java recipe' do
+            expect(chef_run).to include_recipe('java')
+          end
+          it 'includes newrelic_plugins::mysql recipe' do
+            expect(chef_run).to include_recipe('newrelic_plugins::mysql')
+          end
+          it 'configures newrelic mysql plugin with monitoring user' do
+            expect(chef_run).to render_file('/opt/newrelic/newrelic_mysql_plugin/config/plugin.json').with_content('raxmon-agent')
+          end
+          # We should add all the specs on https://github.com/newrelic-platform
+          # For now we just have a simple test
+          it 'starts newrelic-mysql-plugin service' do
+            expect(chef_run).to enable_service('newrelic-mysql-plugin')
+            expect(chef_run).to start_service('newrelic-mysql-plugin')
+          end
+        end
+        context 'mysql with java' do
+          let(:chef_run) do
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+              node_resources(node)
+              node.set['languages']['java']['version'] = '1.6'
+            end.converge('stack_commons::mysql_base', described_recipe)
+          end
+          it "doesn't include java recipe" do
+            expect(chef_run).to_not include_recipe('java')
+          end
+        end
         context 'rabbitmq' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
