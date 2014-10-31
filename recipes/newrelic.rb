@@ -58,6 +58,29 @@ if node['newrelic']['license']
     }
   end
 
+  if node.recipe?('mysql::server')
+    # Check if Java is installed
+    ohai 'reload' do
+      action :reload
+    end
+    unless node['languages']['java'] && node['languages']['java']['version'].start_with?('1.6', '1.7', '1.8')
+      include_recipe 'java'
+    end
+    # Copy newrelic license key to license_key (newrelic and newrelic_plugins are not using the same attributes)
+    node.default['newrelic']['license_key'] = node['newrelic']['license']
+    node.default['newrelic']['mysql']['servers'] = [
+      {
+        name: node.name,
+        host: 'localhost',
+        metrics: 'status,newrelic',
+        mysql_user: node['stack_commons']['cloud_monitoring']['agent_mysql']['user'],
+        mysql_passwd: node['stack_commons']['cloud_monitoring']['agent_mysql']['password']
+      }
+    ]
+    # install mysql newrelic plugin
+    include_recipe 'newrelic_plugins::mysql'
+  end
+
   if node.recipe?('rabbitmq::default')
     # needs to be run before hand to set attributes (port specifically)
     meetme_config['rabbitmq'] = {
