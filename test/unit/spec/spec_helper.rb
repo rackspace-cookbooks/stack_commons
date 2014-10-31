@@ -16,7 +16,7 @@ def node_resources(node)
   node.automatic['example']['attribute'] = 'lions, tigers and bears!'
 
   # newrelic
-  node.set['newrelic']['license'] = 'mylicence'
+  node.set['newrelic']['license'] = 'aaaaaaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaa'
 
   # redis
   node.default_unless['redisio']['servers'] = []
