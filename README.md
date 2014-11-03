@@ -1,41 +1,17 @@
 stack_commons Cookbook
 ======================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Common recipes/libraries required by other stacks (phpstacks/pythonstacks ...)
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - stack_commons needs toaster to brown your bagel.
 
 Attributes
 ----------
 TODO: List your cookbook attributes here.
 
-e.g.
-#### stack_commons::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['stack_commons']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
-
 Usage
 -----
+### Recipes
 #### stack_commons::default
 TODO: Write usage instructions for each cookbook.
 
@@ -50,10 +26,29 @@ Just include `stack_commons` in your node's `run_list`:
   ]
 }
 ```
+#### stack_commons::newrelic
+Just include `stack_commons::newrelic` in your node's `run_list`:
+
+```json
+{
+  "name":"my_node",
+  "run_list": [
+    "recipe[stack_commons::newrelic]"
+  ]
+}
+```
+
+---
+Warning :
+Due to a resource name conflict between elasticsearch and newrelic_plugins cookbook we are using a fork rather than the upstream cookbook. You need to get this fork or add the following lines to your Berkshelf file :
+```
+cookbook 'newrelic_plugins', git: 'git@github.com:rackspace-cookbooks/newrelic_plugins_chef.git'
+```
+More details : https://github.com/newrelic-platform/newrelic_plugins_chef/pull/29
+
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
 e.g.
 1. Fork the repository on Github
