@@ -1,6 +1,7 @@
 source 'https://supermarket.getchef.com'
 
 cookbook 'rackops_rolebook', git: 'git@github.com:rackops/rackops_rolebook.git'
+cookbook 'newrelic_plugins', git: 'git@github.com:jujugrrr/newrelic_plugins_chef.git', branch: "rename_install_plugin"
 cookbook 'cron', git: 'git@github.com:rackspace-cookbooks/cron.git'
 
 group :integration do
