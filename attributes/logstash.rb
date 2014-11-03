@@ -56,8 +56,10 @@ default['elkstack']['config']['custom_logstash']['name'].push('postgresql')
 default['elkstack']['config']['custom_logstash']['postgresql']['name'] = 'input_postgresql'
 default['elkstack']['config']['custom_logstash']['postgresql']['cookbook'] = 'stack_commons'
 default['elkstack']['config']['custom_logstash']['postgresql']['source'] = 'logstash/input_postgresql.conf.erb'
+# have to do the chain of && in case postgres isn't included in runlist, these may not exist
 postgresql_log_dir = node['postgresql'] && node['postgresql']['config'] && node['postgresql']['config']['log_directory']
-default['elkstack']['config']['custom_logstash']['postgresql']['variables'] = { path: "#{postgresql_log_dir}/**log" }
+postgresql_data_dir = node['postgresql'] && node['postgresql']['config'] && node['postgresql']['config']['data_directory']
+default['elkstack']['config']['custom_logstash']['postgresql']['variables'] = { path: "#{postgresql_data_dir}/#{postgresql_log_dir}/**log" }
 
 # RabbitMQ
 default['elkstack']['config']['custom_logstash']['name'].push('rabbitmq')
