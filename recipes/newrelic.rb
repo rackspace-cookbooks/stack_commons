@@ -32,6 +32,7 @@ if node['newrelic']['license']
     include_recipe 'php'  # needed so that we don't install apache by installing the agent
     node.override['newrelic']['php_agent']['agent_action'] = 'upgrade'
     node.default['newrelic']['php_agent']['config_file'] = "#{node['php']['ext_conf_dir']}/newrelic.ini"
+    node.default['newrelic']['php_agent']['startup_mode'] = 'external'
     include_recipe 'newrelic::php_agent'
   end
   if node['stack_commons']['application_monitoring']['python']['enabled'] == true
