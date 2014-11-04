@@ -26,6 +26,10 @@ default['stack_commons']['rabbitmq']['passwords'] = {}
 default['stack_commons']['db-autocreate']['enabled'] = true
 default['stack_commons']['varnish']['multi'] = true
 
+default['stack_commons']['application_monitoring']['php']['enabled'] = false
+default['stack_commons']['application_monitoring']['python']['enabled'] = false
+default['stack_commons']['application_monitoring']['java']['enabled'] = false
+
 default['disk']['name'] = '/dev/xvde1'
 default['disk']['fs'] = 'ext4'
 
