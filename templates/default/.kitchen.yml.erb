@@ -1,0 +1,68 @@
+---
+################################################################################
+# Any local customizations should be placed inside the .kitchen.local.yml, which
+# will not be checked in or overwritten. You may also use ~/.kitchen/config.yml
+# or environment variables like VAGRANT_DEFAULT_PROVIDER. Anything in those will
+# take precedence over anything set in `.kitchen.yml`.
+################################################################################
+driver:
+  name: vagrant # provide a default test-kitchen driver, vagrant
+
+driver_config:
+  require_chef_omnibus: latest
+
+provisioner:
+  name: chef_zero
+  client_rb:
+    environment: _default
+  attributes:
+    authorization:
+      sudo:
+        users: ['vagrant']
+        passwordless: true
+    mysql:
+      server_root_password: "randompass"
+      server_repl_password: "randompass"
+      server_debian_password: "randompass"
+    postgresql:
+      version: '9.3'
+      enable_pgdg_apt: true
+      enable_pgdg_yum: true
+    holland:
+      password: "randompass"
+    openssh:
+      server:
+        password_authentication: 'yes'
+        permit_root_login: 'yes'
+    cloud:
+      public_ipv4: '127.0.0.1'
+    platformstack:
+      cloud_backup:
+        enabled: false
+      cloud_monitoring:
+        enabled: false
+      omnibus_updater:
+        enabled: false
+      iptables:
+        allow_ssh_from_world: true
+    rackspace:
+      cloud_credentials:
+        username: 'racker'
+        api_key: 'sekrit'
+
+platforms:
+  - name: ubuntu-14.04
+    run_list:
+    - recipe[apt]
+  - name: ubuntu-12.04
+    run_list:
+    - recipe[apt]
+  - name: centos-6.5
+    run_list:
+    - recipe[yum]
+
+suites:
+  - name: default
+    run_list: recipe[wrapper::default]
+    attributes:
+      foo: 'bar'
