@@ -18,7 +18,7 @@ describe 'stack_commons::newrelic' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
               node_resources(node)
-              node.set['stack_commons']['stackname'] = 'pythonstack'
+              node.set['stack_commons']['application_monitoring']['python']['enabled'] = true
             end.converge(described_recipe)
           end
 
@@ -36,7 +36,7 @@ describe 'stack_commons::newrelic' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
               node_resources(node)
-              node.set['stack_commons']['stackname'] = 'phpstack'
+              node.set['stack_commons']['application_monitoring']['php']['enabled'] = true
               # https://github.com/escapestudios- cookbooks/newrelic/blob/master/spec/unit/php_agent_spec.rb#L9
               node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
             end.converge(described_recipe)
@@ -52,7 +52,7 @@ describe 'stack_commons::newrelic' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
               node_resources(node)
-              node.set['stack_commons']['stackname'] = 'tomcatstack'
+              node.set['stack_commons']['application_monitoring']['java']['enabled'] = true
             end.converge(described_recipe)
           end
           %w( platformstack::default newrelic::java_agent newrelic_meetme_plugin).each do |recipe|
