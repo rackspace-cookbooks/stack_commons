@@ -115,6 +115,7 @@ describe 'stack_commons::newrelic' do
           end
           it 'configures newrelic meetme for rabbitmq' do
             expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('rabbitmq')
+            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('15672')
           end
         end
         context 'redis' do
