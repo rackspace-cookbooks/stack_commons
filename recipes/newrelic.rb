@@ -86,7 +86,7 @@ if node['newrelic']['license']
     meetme_config['rabbitmq'] = {
       name: node['hostname'],
       host: 'localhost',
-      port: node['rabbitmq']['port'],
+      port: 15_672,
       username: 'monitor',
       password: node['stack_commons']['rabbitmq']['monitor_password'],
       api_path: '/api'
