@@ -41,7 +41,7 @@ default['elkstack']['config']['custom_logstash']['name'].push('mysql')
 default['elkstack']['config']['custom_logstash']['mysql']['name'] = 'input_mysql'
 default['elkstack']['config']['custom_logstash']['mysql']['cookbook'] = 'stack_commons'
 default['elkstack']['config']['custom_logstash']['mysql']['source'] = 'logstash/input_mysql.conf.erb'
-default['elkstack']['config']['custom_logstash']['mysql']['variables'] = { path: '/var/log/mysql/**' }
+default['elkstack']['config']['custom_logstash']['mysql']['variables'] = { path: '/var/log/mysql**' }
 
 # Nginx
 default['elkstack']['config']['custom_logstash']['name'].push('nginx')
