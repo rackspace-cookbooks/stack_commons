@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.22
+------
+- @jujugrrr - Changed mysql logtash log path to match mysql multi
+
 0.0.21
 ------
 - @jujugrrr - Changed rabbitmq monitoring port to 15672 and not the rabbitmq port (set by rabbitmq::mgmt_console)
