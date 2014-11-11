@@ -22,7 +22,7 @@ describe 'stack_commons::newrelic' do
             end.converge(described_recipe)
           end
 
-          %w( platformstack::default newrelic::python_agent python::package python::pip python newrelic_meetme_plugin).each do |recipe|
+          %w( newrelic::python_agent python::package python::pip python newrelic_meetme_plugin).each do |recipe|
             it "includes #{recipe} recipe" do
               expect(chef_run).to include_recipe(recipe)
             end
@@ -41,7 +41,7 @@ describe 'stack_commons::newrelic' do
               node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
             end.converge(described_recipe)
           end
-          %w( platformstack::default php newrelic::php_agent newrelic_meetme_plugin).each do |recipe|
+          %w( php newrelic::php_agent newrelic_meetme_plugin).each do |recipe|
             it "includes #{recipe} recipe" do
               expect(chef_run).to include_recipe(recipe)
             end
@@ -55,7 +55,7 @@ describe 'stack_commons::newrelic' do
               node.set['stack_commons']['application_monitoring']['java']['enabled'] = true
             end.converge(described_recipe)
           end
-          %w( platformstack::default newrelic::java_agent newrelic_meetme_plugin).each do |recipe|
+          %w( newrelic::java_agent newrelic_meetme_plugin).each do |recipe|
             it "includes #{recipe} recipe" do
               expect(chef_run).to include_recipe(recipe)
             end
