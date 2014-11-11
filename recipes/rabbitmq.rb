@@ -24,7 +24,6 @@ stackname = node['stack_commons']['stackname']
 node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
 
 include_recipe 'chef-sugar'
-include_recipe 'platformstack::iptables'
 
 # allow app nodes to connect
 node.default['rabbitmq']['port'] = '5672' if node['rabbitmq']['port'].nil?

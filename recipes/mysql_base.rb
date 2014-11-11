@@ -22,8 +22,6 @@ stackname = node['stack_commons']['stackname']
 
 include_recipe 'apt' if node.platform_family?('debian')
 include_recipe 'chef-sugar'
-include_recipe 'platformstack::monitors'
-include_recipe 'platformstack::iptables'
 
 # set demo attributes if needed
 node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
@@ -62,18 +60,6 @@ end
 mysql_database_user node['stack_commons']['cloud_monitoring']['agent_mysql']['user'] do
   connection connection_info
   password node['stack_commons']['cloud_monitoring']['agent_mysql']['password']
-  action 'create'
-  only_if { node.deep_fetch('platformstack', 'cloud_monitoring', 'enabled') }
-end
-
-template 'mysql-monitor' do
-  cookbook 'stack_commons'
-  source 'monitoring-agent-mysql.yaml.erb'
-  path '/etc/rackspace-monitoring-agent.conf.d/agent-mysql-monitor.yaml'
-  owner 'root'
-  group 'root'
-  mode '00600'
-  notifies 'restart', 'service[rackspace-monitoring-agent]', 'delayed'
   action 'create'
   only_if { node.deep_fetch('platformstack', 'cloud_monitoring', 'enabled') }
 end
