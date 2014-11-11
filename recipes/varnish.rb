@@ -21,7 +21,6 @@
 stackname = node['stack_commons']['stackname']
 
 include_recipe 'chef-sugar'
-include_recipe 'platformstack::iptables'
 if platform_family?('debian')
   include_recipe 'apt'
 else

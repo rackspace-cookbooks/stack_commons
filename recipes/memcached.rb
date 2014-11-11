@@ -22,7 +22,6 @@ include_recipe 'apt' if platform_family?('debian')
 include_recipe 'memcached'
 
 # iptables
-include_recipe 'platformstack::iptables'
 add_iptables_rule('INPUT', "-m tcp -p tcp --dport #{node['memcached']['port']} -j ACCEPT", 9999, 'Open TCP port for memcache')
 add_iptables_rule('INPUT', "-m udp -p udp --dport #{node['memcached']['port']} -j ACCEPT", 9999, 'Open UDP port for memcache')
 

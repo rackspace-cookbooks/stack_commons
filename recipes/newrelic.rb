@@ -26,7 +26,6 @@ if node['newrelic']['license']
   node.override['newrelic']['application_monitoring']['daemon']['ssl'] = true
   node.override['newrelic']['server_monitoring']['ssl'] = true
   node.default['newrelic_meetme_plugin']['license'] = node['newrelic']['license']
-  include_recipe 'platformstack::default'
 
   if node['stack_commons']['application_monitoring']['php']['enabled'] == true
     include_recipe 'php'  # needed so that we don't install apache by installing the agent

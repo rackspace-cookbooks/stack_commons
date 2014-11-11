@@ -20,7 +20,6 @@
 
 include_recipe 'stack_commons::mysql_base'
 include_recipe 'mysql-multi::mysql_master'
-include_recipe 'platformstack::iptables'
 
 node['mysql-multi']['slaves'].each do |slave|
   next if slave.nil?
