@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.24
+------
+- @yourname - your changes
+
 0.0.23
 ------
 - @martinb3 - Removed platformstack dependencies and use attributes for configuring monitors.
