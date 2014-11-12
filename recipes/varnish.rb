@@ -27,8 +27,10 @@ else
   include_recipe 'yum-epel'
 end
 
-# include demo if needed
-node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
+# check if they exist, then set demo attributes if needed
+# -- it seems bad to be touching webserver attributes here.
+webserver = node.deep_fetch(stackname, 'webserver')
+node.default[stackname][webserver]['sites'] = node.deep_fetch(stackname, 'demo', webserver, 'sites') if webserver && node.deep_fetch(stackname, 'demo', 'enabled')
 
 add_iptables_rule('INPUT', "-p tcp --dport #{node['varnish']['listen_port']} -j ACCEPT", 9997, 'allow web browsers to connect')
 
