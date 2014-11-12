@@ -12,6 +12,11 @@ TODO: List your cookbook attributes here.
 Usage
 -----
 ### Recipes
+
+#### stack_commons::mysql_*
+
+Adds monitoring and iptables using platformstack, only when platformstack is present. See platformstack's [README.md](https://github.com/rackspace-cookbooks/platformstack#monitors) and [attribute file on monitors](https://github.com/rackspace-cookbooks/platformstack/blob/master/attributes/cloud_monitoring.rb#L101-L123).
+
 #### stack_commons::default
 TODO: Write usage instructions for each cookbook.
 
