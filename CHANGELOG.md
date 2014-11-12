@@ -5,7 +5,7 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.24
 ------
-- @yourname - your changes
+- @martinb3 - Ensure a default value for custom monitoring array when not using platformstack.
 
 0.0.23
 ------
