@@ -23,8 +23,10 @@ stackname = node['stack_commons']['stackname']
 include_recipe 'apt' if node.platform_family?('debian')
 include_recipe 'chef-sugar'
 
-# set demo attributes if needed
-node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
+# check if they exist, then set demo attributes if needed
+# -- it seems bad to be touching webserver attributes here.
+webserver = node.deep_fetch(stackname, 'webserver')
+node.default[stackname][webserver]['sites'] = node.deep_fetch(stackname, 'demo', webserver, 'sites') if webserver && node.deep_fetch(stackname, 'demo', 'enabled')
 
 # set passwords dynamically...
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
