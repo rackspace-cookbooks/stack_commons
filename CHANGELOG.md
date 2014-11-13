@@ -3,9 +3,14 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.26
+------
+
+TBD
+
 0.0.25
 ------
-- @yourname - your change
+- @martinb3 - Use node.deep_fetch, guard access to nested attrs
 
 0.0.24
 ------
