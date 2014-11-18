@@ -41,6 +41,15 @@ end
 
 def stub_resources
   stub_command('which sudo').and_return('/usr/bin/sudo')
+
+  # Stubs and mocks for mysql_add_drive
+  shellout = double
+  stub_command('mkfs -t ext4 /dev/xvde1').and_return(true)
+  allow(File).to receive(:blockdev?).with('/dev/xvde1').and_return(true)
+  allow(Mixlib::ShellOut).to receive(:new).with('blkid -s TYPE -o value /dev/xvde1').and_return(shellout)
+  allow(shellout).to receive(:run_command).and_return(shellout)
+  allow(shellout).to receive(:error!).and_return(true)
+  allow(shellout).to receive(:error?).and_return(true)
 end
 
 at_exit { ChefSpec::Coverage.report! }
