@@ -3,6 +3,12 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.27
+------
+- @seeafish:
+  - Add a hard fail condition for mysql on ubuntu 12.04 and older
+  - Remove mysql::client include as it's called by database::mysql anyway and actually causes compatibility issues
+
 0.0.26
 ------
 
