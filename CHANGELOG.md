@@ -5,9 +5,8 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.27
 ------
-- @seeafish:
-  - Add a hard fail condition for mysql on ubuntu 12.04 and older
-  - Remove mysql::client include as it's called by database::mysql anyway and actually causes compatibility issues
+- @seeafish - Add a fatal for mysql on ubuntu versions older than 14.04, as it will due to upstream
+- @seeafish - Remove mysql::client include as it's called by database::mysql anyway and causes compatibility issues
 
 0.0.26
 ------
