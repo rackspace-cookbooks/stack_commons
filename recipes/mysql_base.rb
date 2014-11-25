@@ -39,7 +39,8 @@ end
 if ubuntu_before_trusty? && node['mysql']['version']
   if node['mysql']['version'] == '5.6'
     errmsg = "MySQL 5.6 isn't available on this platform. Please change version."
-    Chef::Application.fatal!(errmsg, 1)
+    Chef::Log.error(errmsg)
+    fail errmsg
   end
 end
 
