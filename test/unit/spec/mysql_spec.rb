@@ -12,6 +12,26 @@ describe 'stack_commons::mysql' do
       # Context for each platform
       context "on #{platform.capitalize} #{version}" do
 
+        context 'for mysql v5.6' do
+          let(:chef_run) do
+            ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+              node_resources(node)
+              node.set['mysql']['version'] = '5.6'
+            end.converge('stack_commons::mysql_base')
+          end
+
+          if platform == 'ubuntu' && version == '12.04'
+            it 'raises an error' do
+              expect { chef_run }.to raise_error
+            end
+          else
+            it 'does not raise an error' do
+              expect { chef_run }.to_not raise_error
+            end
+          end
+
+        end # end mysql v5.6
+
         context 'for mysql-base' do
           cached(:chef_run) do
             ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
