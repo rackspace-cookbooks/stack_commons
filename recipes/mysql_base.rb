@@ -35,9 +35,17 @@ if node['mysql']['server_root_password'] == 'ilikerandompasswords'
   node.set['mysql']['server_root_password'] = secure_password
 end
 
+# Provide more verbose error when trying to install 5.6 on < Ubuntu 14.04
+if ubuntu_before_trusty? && node['mysql']['version']
+  if node['mysql']['version'] == '5.6'
+    errmsg = "MySQL 5.6 isn't available on this platform. Please change version."
+    Chef::Log.error(errmsg)
+    fail errmsg
+  end
+end
+
 include_recipe 'build-essential'
 include_recipe 'mysql::server'
-include_recipe 'mysql::client'
 include_recipe 'mysql-multi'
 include_recipe 'database::mysql'
 
