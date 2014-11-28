@@ -3,6 +3,11 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.28
+------
+
+- Please put your changelog here. Don't bump to version 0.0.29 until after release.
+
 0.0.27
 ------
 - @seeafish - Add a fatal for mysql on ubuntu versions older than 14.04, as it will due to upstream
@@ -10,8 +15,7 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.26
 ------
-
-TBD
+- @seeafish - No change.
 
 0.0.25
 ------
