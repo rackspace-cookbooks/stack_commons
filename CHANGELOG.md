@@ -6,7 +6,7 @@ This file is used to list changes made in each version of the stack_commons cook
 0.0.28
 ------
 
-- Please put your changelog here. Don't bump to version 0.0.29 until after release.
+- @martinb3 - Revert removal of mysql::client RE: https://github.com/rackspace-cookbooks/pythonstack/issues/131 and #64.
 
 0.0.27
 ------
