@@ -121,7 +121,7 @@ if node['newrelic']['license']
           name: node['hostname'],
           host: 'localhost',
           port: nginx_sites.values[0]['uwsgi_port']
-        }        
+        }
       else
         Chef::Log.warn('uwsgi was on the runlist, but uwsgi_port was not set on any site')
       end
