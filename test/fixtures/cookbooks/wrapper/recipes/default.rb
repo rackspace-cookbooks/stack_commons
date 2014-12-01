@@ -5,10 +5,6 @@
 # Copyright 2014, Rackspace
 #
 #
-
-# newrelic
-node.set['newrelic']['license'] = 'aaaaaaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaa'
-
 %w(
   stack_commons::mysql_master
   stack_commons::postgresql_master
@@ -19,8 +15,6 @@ node.set['newrelic']['license'] = 'aaaaaaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaa'
   stack_commons::redis_master
   stack_commons::redis_slave
   stack_commons::redis_sentinel
-  nginx
-  uwsgi
   stack_commons::newrelic
   elkstack::agent
 ).each do |recipe|
