@@ -8,12 +8,6 @@ describe 'stack_commons::newrelic' do
     versions.each do |version|
       # Context for each platform
       context "on #{platform.capitalize} #{version}" do
-        let(:chef_run) do
-          ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
-            node_resources(node)
-          end.converge(described_recipe)
-        end
-
         context 'pythonstack' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
@@ -68,10 +62,8 @@ describe 'stack_commons::newrelic' do
               node_resources(node)
             end.converge('memcached', described_recipe)
           end
-          it 'configures newrelic meetme for memcached' do
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('memcached')
-          end
         end
+
         context 'mysql' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
@@ -94,6 +86,7 @@ describe 'stack_commons::newrelic' do
             expect(chef_run).to start_service('newrelic-mysql-plugin')
           end
         end
+
         context 'mysql with java' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
@@ -105,6 +98,7 @@ describe 'stack_commons::newrelic' do
             expect(chef_run).to_not include_recipe('java')
           end
         end
+
         context 'rabbitmq' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
@@ -113,21 +107,16 @@ describe 'stack_commons::newrelic' do
               node.set['stack_commons']['nginx']['sites']['80']['site1']['server_name'] = 'site1'
             end.converge('rabbitmq', described_recipe)
           end
-          it 'configures newrelic meetme for rabbitmq' do
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('rabbitmq')
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('15672')
-          end
         end
+
         context 'redis' do
           let(:chef_run) do
             ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
               node_resources(node)
             end.converge('stack_commons::redis_base',  described_recipe)
           end
-          it 'configures newrelic meetme for redis' do
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('redis')
-          end
         end
+
         context 'nginx without uwsgi' do
           before do
             stub_command('which nginx').and_return(true)
@@ -145,13 +134,8 @@ describe 'stack_commons::newrelic' do
             expect(chef_run).to run_execute('nxensite monitor.conf')
             expect(chef_run.execute('nxensite monitor.conf')).to notify('service[nginx]').to(:reload)
           end
-          it 'configures newrelic meetme for nginx' do
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('nginx')
-          end
-          it "doesn't configures newrelic meetme for uwsgi" do
-            expect(chef_run).to_not render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('uwsgi')
-          end
         end
+
         context 'nginx and uwsgi' do
           before do
             stub_command('which nginx').and_return(true)
@@ -168,12 +152,6 @@ describe 'stack_commons::newrelic' do
           it 'enables /server_status' do
             expect(chef_run).to run_execute('nxensite monitor.conf')
             expect(chef_run.execute('nxensite monitor.conf')).to notify('service[nginx]').to(:reload)
-          end
-          it 'configures newrelic meetme for nginx' do
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('nginx')
-          end
-          it 'configures newrelic meetme for uwsgi' do
-            expect(chef_run).to render_file('/etc/newrelic/newrelic-plugin-agent.cfg').with_content('uwsgi')
           end
         end
 

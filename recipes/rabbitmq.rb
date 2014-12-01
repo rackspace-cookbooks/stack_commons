@@ -17,13 +17,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+include_recipe 'chef-sugar'
 stackname = node['stack_commons']['stackname']
 
 # set demo attributes if needed
-node.default[stackname][node[stackname]['webserver']]['sites'] = node[stackname]['demo'][node[stackname]['webserver']]['sites'] if node[stackname]['demo']['enabled']
-
-include_recipe 'chef-sugar'
+demo_enabled = node.deep_fetch(stackname, 'demo', 'enabled')
+webserver = node.deep_fetch(stackname, 'webserver')
+demo_sites = node.deep_fetch(stackname, 'demo', webserver, 'sites')
+node.default[stackname][webserver]['sites'] = demo_sites if demo_enabled && webserver && demo_sites
 
 # allow app nodes to connect
 node.default['rabbitmq']['port'] = '5672' if node['rabbitmq']['port'].nil?
