@@ -113,12 +113,18 @@ if node['newrelic']['license']
       port: node['nginx']['status']['port'],
       path: '/server-status'
     }
-    if node.recipe?('uwsgi::default')
-      meetme_config['uwsgi'] = {
-        name: node['hostname'],
-        host: 'localhost',
-        port: node[stackname]['nginx']['sites'].values[0]['uwsgi_port']
-      }
+
+    nginx_sites = node.deep_fetch(stackname, 'nginx', 'sites')
+    if node.recipe?('uwsgi::default') && nginx_sites && !nginx_sites.empty?
+      if nginx_sites.values[0]['uwsgi_port']
+        meetme_config['uwsgi'] = {
+          name: node['hostname'],
+          host: 'localhost',
+          port: nginx_sites.values[0]['uwsgi_port']
+        }        
+      else
+        Chef::Log.warn('uwsgi was on the runlist, but uwsgi_port was not set on any site')
+      end
     end
   end
 
