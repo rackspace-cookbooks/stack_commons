@@ -3,6 +3,11 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.29
+------
+
+- TBD, your changes go here.
+
 0.0.28
 ------
 
