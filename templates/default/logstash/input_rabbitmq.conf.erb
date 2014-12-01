@@ -1,12 +1,17 @@
 input {
   file {
-    path => "<%= @path %>"
+    path => "/var/log/rabbitmq/**"
     type => "rabbitmq"
   }
 }
 
 filter {
-  if [type] == "rabbitmq" {
+ multiline {
+    type => "rabbitmq"
+    pattern => "[^\s\\]"
+    what => "previous"
+ }
+ if [type] == "rabbitmq" {
     if [path] =~ "log" {
       mutate { replace => { type => "rabbitmq_log" } }
     } else if [path] =~ "_err" {
