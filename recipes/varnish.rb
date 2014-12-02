@@ -38,7 +38,8 @@ add_iptables_rule('INPUT', "-p tcp --dport #{node['varnish']['listen_port']} -j 
 node.set['platformstack']['cloud_monitoring']['plugins']['varnish']['disabled'] = false
 
 # set the default port to send things on to something that might be useful
-node.default['varnish']['backend_port'] = node[node[stackname]['webserver']]['listen_ports'].first
+listen_ports = node.deep_fetch(webserver, 'listen_ports')
+node.default['varnish']['backend_port'] = listen_ports.first if listen_ports && !listen_ports.empty?
 
 # pull a list of backend hosts to populate the template
 backend_hosts = {}

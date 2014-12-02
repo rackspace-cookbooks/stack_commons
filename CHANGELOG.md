@@ -6,7 +6,10 @@ This file is used to list changes made in each version of the stack_commons cook
 0.0.29
 ------
 
-- TBD, your changes go here.
+- @martinb3 - Move newrelic tests from chefspec to serverspec, as upstream released a new version of the newrelic meetme agent cookbook, switching to LWRPs for some pieces of functionality we were testing in chefspec
+- @martinb3 - Removes the extraneous testing of distros where we did not check any differences
+- @martinb3 - Added some guards for recipes that did not like being converged with 'demo' set to true but with nginx enabled (the demo was only working w/ apache)
+
 
 0.0.28
 ------
