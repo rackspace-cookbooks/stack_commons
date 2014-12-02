@@ -1,6 +1,6 @@
 input {
   file {
-    path => "/var/log/rabbitmq/**"
+    path => "<%= @path %>"
     type => "rabbitmq"
   }
 }
