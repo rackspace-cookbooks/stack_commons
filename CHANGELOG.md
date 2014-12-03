@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.30
+------
+- Bump for dev (@martinb3)
+
 0.0.29
 ------
 - @martin - allow mysql monitoring template to converge on non-cloud boxes, actually test this by converging platformstack as part of stack_commons, in a separate test suite
