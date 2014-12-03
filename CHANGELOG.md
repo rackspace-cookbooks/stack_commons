@@ -5,6 +5,7 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.29
 ------
+- @martin - allow mysql monitoring template to converge on non-cloud boxes, actually test this by converging platformstack as part of stack_commons, in a separate test suite
 - @lmunro - changed rabbitmq logstash template to put all logs on a single line in a single message.
 - @martinb3 - Move newrelic tests from chefspec to serverspec, as upstream released a new version of the newrelic meetme agent cookbook, switching to LWRPs for some pieces of functionality we were testing in chefspec
 - @martinb3 - Removes the extraneous testing of distros where we did not check any differences

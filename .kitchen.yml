@@ -21,6 +21,13 @@ provisioner:
       enable_pgdg_yum: true
     holland:
       password: "randompass"
+    openssh:
+      server:
+        password_authentication: 'yes'
+        permit_root_login: 'yes'
+    platformstack:
+      iptables:
+        allow_ssh_from_world: true
 
 platforms:
   - name: ubuntu-12.04

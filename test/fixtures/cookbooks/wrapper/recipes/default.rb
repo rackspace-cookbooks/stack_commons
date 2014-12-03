@@ -17,6 +17,7 @@
   stack_commons::redis_sentinel
   stack_commons::newrelic
   elkstack::agent
+  platformstack
 ).each do |recipe|
   include_recipe recipe
 end
