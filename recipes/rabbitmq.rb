@@ -44,7 +44,7 @@ node.set['platformstack']['cloud_monitoring']['plugins']['rabbitmq']['disabled']
 include_recipe 'rabbitmq'
 
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
-node.set_unless[stackname]['rabbitmq']['monitor_password'] = secure_password
+node.set_unless[stackname]['rabbitmq']['monitor_password'] = secure_password.force_encoding 'UTF-8'
 rabbitmq_user 'monitor' do
   action %w(add set_permissions change_password)
   permissions '.* .* .*'
@@ -60,7 +60,7 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
       action 'add'
     end
 
-    node.set_unless[stackname]['rabbitmq']['passwords'][rabbit_vhost] = secure_password
+    node.set_unless[stackname]['rabbitmq']['passwords'][rabbit_vhost] = secure_password.force_encoding 'UTF-8'
 
     rabbitmq_user rabbit_vhost do
       action %w(add set_permissions change_password)
