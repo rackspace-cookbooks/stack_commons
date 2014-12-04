@@ -38,10 +38,6 @@ if node['newrelic']['license']
     include_recipe 'newrelic::python_agent'
     include_recipe 'python'
     include_recipe 'python::pip'
-    python_pip 'setuptools' do
-      action :upgrade
-      version node['python']['setuptools_version']
-    end
   end
   if node['stack_commons']['application_monitoring']['java']['enabled'] == true
     include_recipe 'newrelic::java_agent'
@@ -136,6 +132,13 @@ if node['newrelic']['license']
 
   node.override['newrelic_meetme_plugin']['services'] = meetme_config
   node.default['newrelic_meetme_plugin']['package_name'] = 'newrelic-plugin-agent'
+
+  # Upgrade setuptools globally to ensure pip works
+  include_recipe 'python::pip'
+  python_pip 'setuptools' do
+    action :upgrade
+    version node['python']['setuptools_version']
+  end
 
   include_recipe 'newrelic_meetme_plugin'
 else
