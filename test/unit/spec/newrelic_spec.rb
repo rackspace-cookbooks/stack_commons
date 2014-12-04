@@ -20,7 +20,7 @@ describe 'stack_commons::newrelic' do
             it "includes #{recipe} recipe" do
               expect(chef_run).to include_recipe(recipe)
             end
-            it 'ugrades setup tools' do
+            it 'upgrades setuptools' do
               expect(chef_run).to upgrade_python_pip('setuptools')
             end
           end
