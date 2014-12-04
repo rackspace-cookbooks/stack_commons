@@ -5,7 +5,8 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.30
 ------
-- Bump for dev (@martinb3)
+- @seeafish - Move pip setuptools upgrade out of pythonstack conditional and into main newrelic recipe
+- @seeafish - Forced utf-8 encoding on secure_password return value for rabbitmq password as it breaks newrelic
 
 0.0.29
 ------
