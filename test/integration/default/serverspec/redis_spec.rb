@@ -30,5 +30,4 @@ end
 describe file('/etc/redis/sentinel_6381-sentinel.conf') do
   its(:content) { should match(/port 6381/) }
   its(:content) { should match(/sentinel monitor/) }
-
 end

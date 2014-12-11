@@ -33,7 +33,6 @@ describe 'stack_commons::redis_base' do
           expect(chef_run).to include_recipe('redis-multi')
           expect(chef_run).to include_recipe('redis-multi::enable')
         end
-
       end
 
       context 'redis-slave' do
@@ -48,7 +47,6 @@ describe 'stack_commons::redis_base' do
           expect(chef_run).to include_recipe('redis-multi')
           expect(chef_run).to include_recipe('redis-multi::enable')
         end
-
       end
 
       context 'redis-sentinel' do
@@ -63,7 +61,6 @@ describe 'stack_commons::redis_base' do
           expect(chef_run).to include_recipe('redis-multi::sentinel')
           expect(chef_run).to include_recipe('redis-multi::sentinel_enable')
         end
-
       end
     end
   end

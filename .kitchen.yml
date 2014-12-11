@@ -1,11 +1,10 @@
 ---
 driver:
   name: vagrant
-driver_config:
-  require_chef_omnibus: true
 
 provisioner:
   name: chef_zero
+  require_chef_omnibus: 11.16.4
   attributes:
     authorization:
       sudo:
@@ -28,6 +27,9 @@ provisioner:
     platformstack:
       iptables:
         allow_ssh_from_world: true
+    omnibus_updater:
+      version: '11.16.4'
+      force_latest: false
 
 platforms:
   - name: ubuntu-12.04

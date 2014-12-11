@@ -154,7 +154,6 @@ describe 'stack_commons::newrelic' do
             expect(chef_run.execute('nxensite monitor.conf')).to notify('service[nginx]').to(:reload)
           end
         end
-
       end
     end
   end

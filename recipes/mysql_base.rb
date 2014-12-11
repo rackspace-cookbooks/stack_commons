@@ -107,6 +107,7 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
     node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_user'] = "#{site_name[0...10]}-#{port}" # ~FC047
     node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_password'] = secure_password # ~FC047
     node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['privileges'] = %w(select update insert)
+    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['global_privileges'] = []
 
     # need to redefine site_opts because we just added user/passwords to that hash
     site_opts = node[stackname][node[stackname]['webserver']]['sites'][port][site_name]
@@ -120,7 +121,9 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
 
       # allow access if needed
       app_nodes.each do |app_node|
-        mysql_database_user database_opts['mysql_user'] do
+        # db-specific privileges
+        mysql_database_user "db #{database} grants on #{app_node}" do
+          username database_opts['mysql_user']
           connection connection_info
           password database_opts['mysql_password']
           host best_ip_for(app_node)
@@ -129,6 +132,19 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
           retries 2
           retry_delay 2
           action %w(create grant)
+        end
+
+        # global privileges (db = "*")
+        mysql_database_user "global grants on #{app_node}" do
+          username database_opts['mysql_user']
+          connection connection_info
+          password database_opts['mysql_password']
+          host best_ip_for(app_node)
+          privileges database_opts['global_privileges']
+          retries 2
+          retry_delay 2
+          action %w(create grant)
+          not_if { database_opts['global_privileges'].empty? }
         end
       end
     end
@@ -153,7 +169,8 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
 
   # allow access if needed
   app_nodes.each do |app_node|
-    mysql_database_user database_opts['mysql_user'] do
+    mysql_database_user "db #{database} grants on #{app_node}" do
+      username database_opts['mysql_user']
       connection connection_info
       password database_opts['mysql_password']
       host best_ip_for(app_node)
@@ -162,6 +179,19 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
       retries 2
       retry_delay 2
       action %w(create grant)
+    end
+
+    # global privileges (db = "*")
+    mysql_database_user "global grants on #{app_node}" do
+      username database_opts['mysql_user']
+      connection connection_info
+      password database_opts['mysql_password']
+      host best_ip_for(app_node)
+      privileges database_opts['global_privileges']
+      retries 2
+      retry_delay 2
+      action %w(create grant)
+      not_if { database_opts['global_privileges'].empty? }
     end
   end
 end
