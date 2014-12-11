@@ -27,6 +27,9 @@ provisioner:
     platformstack:
       iptables:
         allow_ssh_from_world: true
+    omnibus_updater:
+      version: '11.16.4'
+      force_latest: false
 
 platforms:
   - name: ubuntu-12.04
