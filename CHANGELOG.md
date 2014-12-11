@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.31
+------
+- @martinb3 - Add feature to handle global privs (some software requires the db user have SUPER for triggers, etc)
+
 0.0.30
 ------
 - @seeafish - Move pip setuptools upgrade out of pythonstack conditional and into main newrelic recipe
