@@ -8,10 +8,8 @@ describe 'stack_commons::mysql' do
   before { stub_resources }
   supported_platforms.each do |platform, versions|
     versions.each do |version|
-
       # Context for each platform
       context "on #{platform.capitalize} #{version}" do
-
         context 'for mysql v5.6' do
           let(:chef_run) do
             ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
@@ -29,7 +27,6 @@ describe 'stack_commons::mysql' do
               expect { chef_run }.to_not raise_error
             end
           end
-
         end # end mysql v5.6
 
         context 'for mysql-base' do
@@ -43,7 +40,6 @@ describe 'stack_commons::mysql' do
             expect(chef_run).to include_recipe('mysql-multi')
             expect(chef_run).to include_recipe('mysql::server')
           end
-
         end # end base
 
         context 'for mysql-master' do
@@ -71,9 +67,7 @@ describe 'stack_commons::mysql' do
             expect(chef_run).to include_recipe('mysql-multi')
             expect(chef_run).to include_recipe('mysql-multi::mysql_slave')
           end
-
         end # end slave
-
       end # end context "on #{platform.capitalize} #{version}"
     end # end version
   end # end describe
