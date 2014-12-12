@@ -3,6 +3,14 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.33
+------
+<your changes go here>
+
+0.0.32
+------
+- @martinb3 - Fix logic bug / missing nil check
+
 0.0.31
 ------
 - @martinb3 - Add feature to handle global privs (some software requires the db user have SUPER for triggers, etc)
