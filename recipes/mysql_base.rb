@@ -144,7 +144,7 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
           retries 2
           retry_delay 2
           action %w(create grant)
-          not_if { database_opts['global_privileges'].empty? }
+          only_if { database_opts['global_privileges'] && !database_opts['global_privileges'].empty? }
         end
       end
     end
@@ -163,6 +163,7 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
   node.set_unless[stackname]['mysql']['databases'][database]['mysql_user'] = ::SecureRandom.hex(8)
   node.set_unless[stackname]['mysql']['databases'][database]['mysql_password'] = secure_password
   node.set_unless[stackname]['mysql']['databases'][database]['privileges'] = %w(select update insert)
+  node.set_unless[stackname]['mysql']['databases'][database]['global_privileges'] = []
 
   # need to redefine database_opts because we just added user/passwords to that hash
   database_opts = node[stackname]['mysql']['databases'][database]
@@ -191,7 +192,7 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
       retries 2
       retry_delay 2
       action %w(create grant)
-      not_if { database_opts['global_privileges'].empty? }
+      only_if { database_opts['global_privileges'] && !database_opts['global_privileges'].empty? }
     end
   end
 end
