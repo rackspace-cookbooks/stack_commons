@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.34
+------
+<your changes go here>
+
 0.0.33
 ------
 - @jujugrrr - Pinned cookbook `database` to >= 2.3.1, related to https://github.com/opscode-cookbooks/database/issues/99
