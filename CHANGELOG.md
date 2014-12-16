@@ -3,9 +3,14 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.35
+------
+
+- @cybermerc - Pin mysql cookbook to < 6 until mysql bits can be updated.
+
 0.0.34
 ------
-<your changes go here>
+- Release skipped.
 
 0.0.33
 ------
