@@ -18,6 +18,7 @@
 # limitations under the License.
 #
 
+include_recipe 'chef-sugar'
 stackname = node['stack_commons']['stackname']
 
 # The node['newrelic']['license'] attribute needs to be set for NewRelic to work
@@ -63,13 +64,31 @@ if node['newrelic']['license']
     end
     # Copy newrelic license key to license_key (newrelic and newrelic_plugins are not using the same attributes)
     node.default['newrelic']['license_key'] = node['newrelic']['license']
+    # create mysql monitoring user for newrelic
+    ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
+    node.set_unless['stack_commons']['newrelic']['mysql']['password'] = secure_password
+    # use best_ip_for as localhost is likely to not be on mysql bind address
+    node.default_unless['stack_commons']['newrelic']['mysql']['host'] = best_ip_for(node)
+    connection_info = {
+      host: 'localhost',
+      username: 'root',
+      password: node['mysql']['server_root_password']
+    }
+    mysql_database_user node['stack_commons']['newrelic']['mysql']['user'] do
+      connection connection_info
+      host node['stack_commons']['newrelic']['mysql']['host']
+      password node['stack_commons']['newrelic']['mysql']['password']
+      action 'create'
+    end
+
+    # configure mysql monitoring for newrelic_plugin
     node.default['newrelic']['mysql']['servers'] = [
       {
         name: node.name,
-        host: 'localhost',
+        host: node['stack_commons']['newrelic']['mysql']['host'],
         metrics: 'status,newrelic',
-        mysql_user: node['stack_commons']['cloud_monitoring']['agent_mysql']['user'],
-        mysql_passwd: node['stack_commons']['cloud_monitoring']['agent_mysql']['password']
+        mysql_user: node['stack_commons']['newrelic']['mysql']['user'],
+        mysql_passwd: node['stack_commons']['newrelic']['mysql']['password']
       }
     ]
     # install mysql newrelic plugin
