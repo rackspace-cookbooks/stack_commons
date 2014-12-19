@@ -76,8 +76,11 @@ describe 'stack_commons::newrelic' do
           it 'includes newrelic_plugins::mysql recipe' do
             expect(chef_run).to include_recipe('newrelic_plugins::mysql')
           end
+          it 'creates the mysql user for newrelic' do
+            expect(chef_run).to create_mysql_database_user('newrelic-agent')
+          end
           it 'configures newrelic mysql plugin with monitoring user' do
-            expect(chef_run).to render_file('/opt/newrelic/newrelic_mysql_plugin/config/plugin.json').with_content('raxmon-agent')
+            expect(chef_run).to render_file('/opt/newrelic/newrelic_mysql_plugin/config/plugin.json').with_content('newrelic-agent')
           end
           # We should add all the specs on https://github.com/newrelic-platform
           # For now we just have a simple test
