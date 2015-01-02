@@ -3,7 +3,7 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
-0.0.37
+0.0.38
 ------
 
 - @martinb3 - Move python recipe out by itself, add workaround for #85
