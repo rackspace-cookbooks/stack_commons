@@ -28,6 +28,9 @@ if node['newrelic']['license']
   node.override['newrelic']['server_monitoring']['ssl'] = true
   node.default['newrelic_meetme_plugin']['license'] = node['newrelic']['license']
 
+  # required by newrelic base agent
+  include_recipe 'stack_commons::python'
+
   if node['stack_commons']['application_monitoring']['php']['enabled'] == true
     include_recipe 'php'  # needed so that we don't install apache by installing the agent
     node.override['newrelic']['php_agent']['agent_action'] = 'upgrade'
@@ -37,8 +40,6 @@ if node['newrelic']['license']
   end
   if node['stack_commons']['application_monitoring']['python']['enabled'] == true
     include_recipe 'newrelic::python_agent'
-    include_recipe 'python'
-    include_recipe 'python::pip'
   end
   if node['stack_commons']['application_monitoring']['java']['enabled'] == true
     include_recipe 'newrelic::java_agent'
@@ -151,13 +152,6 @@ if node['newrelic']['license']
 
   node.override['newrelic_meetme_plugin']['services'] = meetme_config
   node.default['newrelic_meetme_plugin']['package_name'] = 'newrelic-plugin-agent'
-
-  # Upgrade setuptools globally to ensure pip works
-  include_recipe 'python::pip'
-  python_pip 'setuptools' do
-    action :upgrade
-    version node['python']['setuptools_version']
-  end
 
   include_recipe 'newrelic_meetme_plugin'
 else

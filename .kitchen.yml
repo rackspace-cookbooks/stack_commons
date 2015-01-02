@@ -51,3 +51,10 @@ suites:
   - name: default
     run_list:
       - recipe[wrapper::default]
+
+# Can be used as a quick way to test the python bugs on centos 6
+# https://github.com/rackspace-cookbooks/stack_commons/issues/85
+#
+#  - name: python
+#    run_list:
+#      - recipe[stack_commons::python]
