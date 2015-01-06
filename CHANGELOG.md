@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.39
+------
+- @martinb3 - Fix python ordering a bit further
+
 0.0.38
 ------
 
