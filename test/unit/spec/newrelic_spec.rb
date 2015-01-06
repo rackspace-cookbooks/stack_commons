@@ -10,7 +10,7 @@ describe 'stack_commons::newrelic' do
       context "on #{platform.capitalize} #{version}" do
         context 'pythonstack' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['stack_commons']['application_monitoring']['python']['enabled'] = true
             end.converge(described_recipe)
@@ -28,7 +28,7 @@ describe 'stack_commons::newrelic' do
 
         context 'phpstack' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['stack_commons']['application_monitoring']['php']['enabled'] = true
               # https://github.com/escapestudios- cookbooks/newrelic/blob/master/spec/unit/php_agent_spec.rb#L9
@@ -44,7 +44,7 @@ describe 'stack_commons::newrelic' do
 
         context 'tomcatstack' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['stack_commons']['application_monitoring']['java']['enabled'] = true
             end.converge(described_recipe)
@@ -58,7 +58,7 @@ describe 'stack_commons::newrelic' do
 
         context 'memcached' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
             end.converge('memcached', described_recipe)
           end
@@ -66,7 +66,7 @@ describe 'stack_commons::newrelic' do
 
         context 'mysql' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
             end.converge('stack_commons::mysql_base', described_recipe)
           end
@@ -92,7 +92,7 @@ describe 'stack_commons::newrelic' do
 
         context 'mysql with java' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['languages']['java']['version'] = '1.6'
             end.converge('stack_commons::mysql_base', described_recipe)
@@ -104,7 +104,7 @@ describe 'stack_commons::newrelic' do
 
         context 'rabbitmq' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['stack_commons']['webserver'] = 'nginx'
               node.set['stack_commons']['nginx']['sites']['80']['site1']['server_name'] = 'site1'
@@ -114,7 +114,7 @@ describe 'stack_commons::newrelic' do
 
         context 'redis' do
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
             end.converge('stack_commons::redis_base',  described_recipe)
           end
@@ -125,7 +125,7 @@ describe 'stack_commons::newrelic' do
             stub_command('which nginx').and_return(true)
           end
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['nginx']['sites']['chefspecsite']['uwsgi_port'] = '666'
             end.converge('nginx', described_recipe)
@@ -144,7 +144,7 @@ describe 'stack_commons::newrelic' do
             stub_command('which nginx').and_return(true)
           end
           let(:chef_run) do
-            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
+            ChefSpec::SoloRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node|
               node_resources(node)
               node.set['stack_commons']['nginx']['sites']['chefspecsite']['uwsgi_port'] = '666'
             end.converge('nginx', 'uwsgi', described_recipe)
