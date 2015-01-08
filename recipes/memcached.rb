@@ -35,5 +35,4 @@ search_add_iptables_rules("tags:#{stackname.gsub('stack', '')}_app_node AND chef
                           9999,
                           'Open port for memcached from app')
 
-
 node.set['platformstack']['cloud_monitoring']['plugins']['memcached']['disabled'] = false
