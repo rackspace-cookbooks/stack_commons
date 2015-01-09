@@ -152,6 +152,7 @@ if node['newrelic']['license']
 
   node.override['newrelic_meetme_plugin']['services'] = meetme_config
   node.default['newrelic_meetme_plugin']['package_name'] = 'newrelic-plugin-agent'
+  user node['newrelic_meetme_plugin']['user']
 
   include_recipe 'newrelic_meetme_plugin'
 else
