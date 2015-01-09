@@ -22,7 +22,16 @@ include_recipe 'apt' if platform_family?('debian')
 include_recipe 'memcached'
 
 # iptables
-add_iptables_rule('INPUT', "-m tcp -p tcp --dport #{node['memcached']['port']} -j ACCEPT", 9999, 'Open TCP port for memcache')
-add_iptables_rule('INPUT', "-m udp -p udp --dport #{node['memcached']['port']} -j ACCEPT", 9999, 'Open UDP port for memcache')
+search_add_iptables_rules("tags:#{node['stack_commons']['stackname'].gsub('stack', '')}_app_node AND chef_environment:#{node.chef_environment}",
+                          'INPUT',
+                          "-m tcp -p tcp --dport #{node['memcached']['port']} -j ACCEPT",
+                          9999,
+                          'Open port for memcached from app')
+
+search_add_iptables_rules("tags:#{node['stack_commons']['stackname'].gsub('stack', '')}_app_node AND chef_environment:#{node.chef_environment}",
+                          'INPUT',
+                          "-m tcp -p udp --dport #{node['memcached']['port']} -j ACCEPT",
+                          9999,
+                          'Open port for memcached from app')
 
 node.set['platformstack']['cloud_monitoring']['plugins']['memcached']['disabled'] = false
