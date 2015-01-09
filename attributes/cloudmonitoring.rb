@@ -25,6 +25,10 @@ default['stack_commons']['cloud_monitoring']['agent_mysql']['timeout'] = 15
 default['stack_commons']['cloud_monitoring']['agent_mysql']['user'] = 'raxmon-agent'
 default['stack_commons']['cloud_monitoring']['agent_mysql']['password'] = nil
 
+default['platformstack']['cloud_monitoring']['custom_monitors']['name'].push('mysql')
+default['platformstack']['cloud_monitoring']['custom_monitors']['mysql']['source'] = 'monitoring-agent-mysql.yaml.erb'
+default['platformstack']['cloud_monitoring']['custom_monitors']['mysql']['cookbook'] = 'stack_commons'
+
 default['platformstack']['cloud_monitoring']['plugins'] = {}
 
 default['platformstack']['cloud_monitoring']['plugins']['varnish']['label'] = 'varnish'
