@@ -27,6 +27,7 @@ if node['newrelic']['license']
   node.override['newrelic']['application_monitoring']['daemon']['ssl'] = true
   node.override['newrelic']['server_monitoring']['ssl'] = true
   node.default['newrelic_meetme_plugin']['license'] = node['newrelic']['license']
+  user node['newrelic_meetme_plugin']['user']
 
   # required by newrelic base agent
   include_recipe 'stack_commons::python'
@@ -152,7 +153,6 @@ if node['newrelic']['license']
 
   node.override['newrelic_meetme_plugin']['services'] = meetme_config
   node.default['newrelic_meetme_plugin']['package_name'] = 'newrelic-plugin-agent'
-  user node['newrelic_meetme_plugin']['user']
 
   include_recipe 'newrelic_meetme_plugin'
 else
