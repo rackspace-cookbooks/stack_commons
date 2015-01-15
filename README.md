@@ -21,6 +21,7 @@
 - `newrelic_plugins`
 - `nginx`
 - `openssl`
+- `percona`
 - `pg-multi`
 - `php`
 - `platformstack`
@@ -108,6 +109,14 @@
 ### nginx
 - what it does
   - nothing
+
+### percona\_master
+- what it does
+  - sets up a percona server in master node configuration
+
+  ### percona\_slave
+  - what it does
+  - sets up a percona server in slave node configuration
 
 ### postgresql\_base
 - what it does

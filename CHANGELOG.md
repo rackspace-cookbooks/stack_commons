@@ -3,9 +3,13 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.41
+------
+- @cybermerc - added percona master/slave recipes
+
 0.0.40
 ------
-- @prometheanfire - change memcahce iptables rules to be search based
+- @prometheanfire - change memcache iptables rules to be search based
 
 0.0.39
 ------
