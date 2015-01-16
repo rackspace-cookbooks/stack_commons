@@ -41,6 +41,9 @@ end
 
 def stub_resources
   stub_command('which sudo').and_return('/usr/bin/sudo')
+  stub_command('rpm -qa | grep Percona-Server-shared-56').and_return(true)
+  stub_command('test -f /var/lib/mysql/mysql/user.frm').and_return(true)
+  stub_command('test -f /etc/mysql/grants.sql').and_return(true)
 end
 
 at_exit { ChefSpec::Coverage.report! }
