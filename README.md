@@ -21,6 +21,7 @@
 - `newrelic_plugins`
 - `nginx`
 - `openssl`
+- `percona-multi`
 - `pg-multi`
 - `php`
 - `platformstack`
@@ -47,6 +48,14 @@
 - what it does
   - sets up glusterfs based on the `node['rackspace_gluster']['config']['server']['glusters']` attribute
     - this may involve some manual setup, it is glusterfs afterall
+
+### percona\_master
+- what it does
+  - sets up a percona master server node.
+
+### percona\_slave
+- what it does
+  - sets up a percona slave server node.
 
 ### memcache
 - what it does
