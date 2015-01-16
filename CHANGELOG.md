@@ -5,11 +5,13 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.41
 ------
-- @cybermerc - added percona master/slave recipes
+- @cybermerc - added percona master/slave recipes.
+Bump for release
 
 0.0.40
 ------
-- @prometheanfire - change memcache iptables rules to be search based
+- @prometheanfire - change memcahce iptables rules to be search based
+- @prometheanfire - change mysql user to not be based off of site but instead be random hex (16 char)
 
 0.0.39
 ------
