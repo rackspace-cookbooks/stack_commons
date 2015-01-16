@@ -3,6 +3,9 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.41
+- @prometheanfire - change mysql user to not be based off of site but instead be random hex (16 char)
+
 0.0.40
 ------
 - @prometheanfire - change memcahce iptables rules to be search based
