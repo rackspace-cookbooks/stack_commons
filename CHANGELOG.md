@@ -5,7 +5,8 @@ This file is used to list changes made in each version of the stack_commons cook
 
 0.0.41
 ------
-Bump for release
+- @prometheanfire - make the user actually 16 characters long (8 bytes in the function)
+- @prometheanfire - make sure the database name conforms to standards
 
 0.0.40
 ------

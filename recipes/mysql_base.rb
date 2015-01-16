@@ -103,8 +103,8 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
       next unless site_opts['db_autocreate']
     end
     # set up the default DB name, user and password
-    db_name = "#{site_name[0...58]}-#{port}"
-    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_user'] = SecureRandom.hex(16) # ~FC047
+    db_name = "#{site_name[0...58]}-#{port}".gsub(/[^0-9A-Za-z\-\_]/, '')
+    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_user'] = SecureRandom.hex(8) # ~FC047
     node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_password'] = secure_password # ~FC047
     node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['privileges'] = %w(select update insert)
     node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['global_privileges'] = []
@@ -160,7 +160,7 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
     action 'create'
   end
 
-  node.set_unless[stackname]['mysql']['databases'][database]['mysql_user'] = ::SecureRandom.hex(16)
+  node.set_unless[stackname]['mysql']['databases'][database]['mysql_user'] = ::SecureRandom.hex(8)
   node.set_unless[stackname]['mysql']['databases'][database]['mysql_password'] = secure_password
   node.set_unless[stackname]['mysql']['databases'][database]['privileges'] = %w(select update insert)
   node.set_unless[stackname]['mysql']['databases'][database]['global_privileges'] = []
