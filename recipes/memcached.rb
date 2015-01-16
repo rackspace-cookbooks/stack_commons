@@ -30,7 +30,7 @@ search_add_iptables_rules("tags:#{node['stack_commons']['stackname'].gsub('stack
 
 search_add_iptables_rules("tags:#{node['stack_commons']['stackname'].gsub('stack', '')}_app_node AND chef_environment:#{node.chef_environment}",
                           'INPUT',
-                          "-m tcp -p udp --dport #{node['memcached']['port']} -j ACCEPT",
+                          "-m udp -p udp --dport #{node['memcached']['port']} -j ACCEPT",
                           9999,
                           'Open port for memcached from app')
 
