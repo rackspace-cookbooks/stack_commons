@@ -7,7 +7,7 @@ description 'provides common supporting features for stacks'
 # long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 
 # don't bump this until *after* releasing to supermarket ('bump for dev')
-version '0.0.40'
+version '0.0.41'
 
 depends 'apache2', '>= 3.0.0'
 depends 'apt'
