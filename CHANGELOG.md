@@ -3,6 +3,14 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.43
+------
+- @martinb3 - fix missing array initializer
+
+0.0.42
+------
+- Missing.
+
 0.0.41
 ------
 - @cybermerc - added percona master/slave recipes
