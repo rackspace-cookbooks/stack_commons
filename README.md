@@ -291,7 +291,7 @@ for more information see https://github.com/rackspace-cookbooks/elkstack/
 {
     "run_list": [
       "recipe[platformstack::default]",
-      "recipe[rackops_rolebook::default]",
+      "recipe[platformstack::rackops_rolebook]",
       "recipe[stack_commons::mysql_base]"
     ]
 }
@@ -302,7 +302,7 @@ for more information see https://github.com/rackspace-cookbooks/elkstack/
 {
     "run_list": [
       "recipe[platformstack::default]",
-      "recipe[rackops_rolebook::default]",
+      "recipe[platformstack::rackops_rolebook]",
       "recipe[stack_commons::mysql_master]"
     ]
 }
@@ -313,7 +313,7 @@ for more information see https://github.com/rackspace-cookbooks/elkstack/
 {
     "run_list": [
       "recipe[platformstack::default]",
-      "recipe[rackops_rolebook::default]",
+      "recipe[platformstack::rackops_rolebook]",
       "recipe[stack_commons::mysql_slave]"
     ]
 }
@@ -341,7 +341,7 @@ node['postgresql']['enable_pdgd_apt'] = true  # (Debian Family)
 {
     "run_list": [
       "recipe[platformstack::default]",
-      "recipe[rackops_rolebook::default]",
+      "recipe[platformstack::rackops_rolebook]",
       "recipe[stack_commons::postgresql_master]"
     ]
 }
@@ -352,7 +352,7 @@ node['postgresql']['enable_pdgd_apt'] = true  # (Debian Family)
 {
     "run_list": [
       "recipe[platformstack::default]",
-      "recipe[rackops_rolebook::default]",
+      "recipe[platformstack::rackops_rolebook]",
       "recipe[stack_commons::postgresql_slave]"
     ]
 }
