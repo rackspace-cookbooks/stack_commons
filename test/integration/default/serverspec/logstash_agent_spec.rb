@@ -3,9 +3,10 @@ require_relative 'spec_helper'
 # fairly simple unit tests since this is from an upstream cookbook.
 # we are mostly testing our own overrides.
 
-describe service('logstash_agent') do
-  it { should be_enabled }
-end
+# broken in serverspec, see https://github.com/serverspec/specinfra/pull/326
+# describe service('logstash_agent') do
+#  it { should be_enabled }
+# end
 
 logstash_extra_config_files =
 %w(
