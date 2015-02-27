@@ -4,7 +4,8 @@ require_relative 'spec_helper'
 
 # rabbitmq
 describe service('rabbitmq-server') do
-  it { should be_enabled }
+  # Broken for ubuntu in upstart, see: https://github.com/serverspec/specinfra/pull/326
+  # it { should be_enabled }
   it { should be_running }
 end
 describe port(5672) do

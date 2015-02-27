@@ -48,7 +48,10 @@ include_recipe 'build-essential'
 include_recipe 'mysql::server'
 include_recipe 'mysql::client'
 include_recipe 'mysql-multi'
-include_recipe 'database::mysql'
+mysql2_chef_gem 'default' do
+  client_version node['mysql']['version'] if node['mysql']
+  action :install
+end
 
 connection_info = {
   host: 'localhost',

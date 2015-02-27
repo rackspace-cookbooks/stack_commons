@@ -61,6 +61,9 @@ postgresql_log_dir = node['postgresql'] && node['postgresql']['config'] && node[
 postgresql_data_dir = node['postgresql'] && node['postgresql']['config'] && node['postgresql']['config']['data_directory']
 default['elkstack']['config']['custom_logstash']['postgresql']['variables'] = { path: "#{postgresql_data_dir}/#{postgresql_log_dir}/**log" }
 
+# ensure it's an array before we start shoving data into it
+default_unless['elkstack']['config']['custom_logstash']['name'] = []
+
 # RabbitMQ
 default['elkstack']['config']['custom_logstash']['name'].push('rabbitmq')
 default['elkstack']['config']['custom_logstash']['rabbitmq']['name'] = 'input_rabbitmq'
