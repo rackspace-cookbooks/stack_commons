@@ -45,7 +45,7 @@ end
 end
 
 # determine if server is slave or standalone and drop specific backupset file
-if node.run_context.loaded_recipe?('phpstack::mysql_slave')
+if node.run_context.loaded_recipe?('stack_commons::mysql_slave')
   template '/etc/holland/backupsets/default.conf' do
     source 'mysql/backup_sets.slave.erb'
     owner 'root'
