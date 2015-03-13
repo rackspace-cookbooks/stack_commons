@@ -9,7 +9,6 @@ description 'provides common supporting features for stacks'
 # don't bump this until *after* releasing to supermarket ('bump for dev')
 version '0.0.44'
 
-depends 'apache2', '>= 3.0.0'
 depends 'apt'
 depends 'build-essential'
 depends 'chef-sugar'
