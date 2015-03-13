@@ -30,7 +30,7 @@ node.default[stackname][webserver]['sites'] = node.deep_fetch(stackname, 'demo',
 
 # set passwords dynamically...
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
-node.set_unless['stack_commons']['cloud_monitoring']['agent_mysql']['password'] = secure_password
+node.default_unless['stack_commons']['cloud_monitoring']['agent_mysql']['password'] = secure_password
 if node['mysql']['server_root_password'] == 'ilikerandompasswords'
   node.set['mysql']['server_root_password'] = secure_password
 end
@@ -107,10 +107,10 @@ node[stackname][node[stackname]['webserver']]['sites'].each do |port, sites|
     end
     # set up the default DB name, user and password
     db_name = "#{site_name[0...58]}_#{port}".gsub(/[^0-9A-Za-z\-\_]/, '')
-    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_user'] = SecureRandom.hex(8) # ~FC047
-    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_password'] = secure_password # ~FC047
-    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['privileges'] = %w(select update insert)
-    node.set_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['global_privileges'] = []
+    node.default_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_user'] = SecureRandom.hex(8) # ~FC047
+    node.default_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['mysql_password'] = secure_password # ~FC047
+    node.default_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['privileges'] = %w(select update insert)
+    node.default_unless[stackname][node[stackname]['webserver']]['sites'][port][site_name]['databases'][db_name]['global_privileges'] = []
 
     # need to redefine site_opts because we just added user/passwords to that hash
     site_opts = node[stackname][node[stackname]['webserver']]['sites'][port][site_name]
@@ -163,10 +163,10 @@ node[stackname]['mysql']['databases'].each do |database, database_opts|
     action 'create'
   end
 
-  node.set_unless[stackname]['mysql']['databases'][database]['mysql_user'] = ::SecureRandom.hex(8)
-  node.set_unless[stackname]['mysql']['databases'][database]['mysql_password'] = secure_password
-  node.set_unless[stackname]['mysql']['databases'][database]['privileges'] = %w(select update insert)
-  node.set_unless[stackname]['mysql']['databases'][database]['global_privileges'] = []
+  node.default_unless[stackname]['mysql']['databases'][database]['mysql_user'] = ::SecureRandom.hex(8)
+  node.default_unless[stackname]['mysql']['databases'][database]['mysql_password'] = secure_password
+  node.default_unless[stackname]['mysql']['databases'][database]['privileges'] = %w(select update insert)
+  node.default_unless[stackname]['mysql']['databases'][database]['global_privileges'] = []
 
   # need to redefine database_opts because we just added user/passwords to that hash
   database_opts = node[stackname]['mysql']['databases'][database]
