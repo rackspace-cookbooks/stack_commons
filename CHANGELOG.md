@@ -3,6 +3,23 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.45
+------
+- @prometheanfire - removed apache2 dep
+- @prometheanfire - switched from set_unless to default_unless
+- @cybermerc - locked mysql-multi version
+- @prometheanfire - fixed checks to look in stack_commons namespace not phpstack
+- @jujugrrr - Pinned down OpenSSL cookbook as the syntax changed, and there is a typo https://github.com/opscode-cookbooks/openssl/commit/03e0e9b690fd9db3d81779762c810371f0fe7e1e
+- @jujugrrr - Cleanup Berksfile to reflect a more current elkstack
+- @jujugrrr - Discovered a bug in serverspec checking for upstart services, see https://github.com/serverspec/specinfra/pull/326
+- @theborch - move to circleci testing platform
+- @prometheanfire - switch to using the mysql_chef_gem automatically now
+
+0.0.44
+------
+- @schwing - Remove conflicting rackops_rolebook
+- @bobross419 - change db naming to use underscores
+
 0.0.43
 ------
 - @martinb3 - fix missing array initializer
