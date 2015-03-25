@@ -6,7 +6,6 @@ license 'Apache 2.0'
 description 'provides common supporting features for stacks'
 # long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 
-# don't bump this until *after* releasing to supermarket ('bump for dev')
 version '0.0.46'
 
 depends 'apt'
