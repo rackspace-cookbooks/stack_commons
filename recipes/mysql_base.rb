@@ -18,8 +18,6 @@
 # limitations under the License.
 #
 
-node.default['build-essential']['compile_time'] = true
-
 stackname = node['stack_commons']['stackname']
 
 include_recipe 'apt' if node.platform_family?('debian')
