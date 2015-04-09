@@ -10,10 +10,9 @@ provisioner:
       sudo:
         users: ['vagrant']
         passwordless: true
-    mysql:
-      server_root_password: "randompass"
+    mysql-multi:
       server_repl_password: "randompass"
-      server_debian_password: "randompass"
+      server_root_password: "randompass"
     postgresql:
       version: '9.3'
       enable_pgdg_apt: true
