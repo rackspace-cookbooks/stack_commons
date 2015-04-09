@@ -23,12 +23,12 @@ end
 
 # mysql base
 if os[:family] == 'redhat'
-  describe service('mysqld') do
+  describe service('mysql-chef') do
     it { should be_enabled }
     it { should be_running }
   end
 else
-  describe service('mysql') do
+  describe service('mysql-chef') do
     it { should be_enabled }
     it { should be_running }
   end
