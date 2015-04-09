@@ -38,7 +38,6 @@ describe 'stack_commons::mysql' do
 
           it 'installs mysql' do
             expect(chef_run).to include_recipe('mysql-multi')
-            expect(chef_run).to include_recipe('mysql::server')
           end
         end # end base
 

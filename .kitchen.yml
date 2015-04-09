@@ -11,6 +11,7 @@ provisioner:
         users: ['vagrant']
         passwordless: true
     mysql-multi:
+      server_version: '5.6'
       server_repl_password: "randompass"
       server_root_password: "randompass"
     postgresql:
