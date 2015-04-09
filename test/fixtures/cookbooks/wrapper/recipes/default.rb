@@ -6,6 +6,7 @@
 #
 #
 %w(
+  build-essential
   stack_commons::mysql_master
   stack_commons::postgresql_master
   stack_commons::mongodb_standalone
