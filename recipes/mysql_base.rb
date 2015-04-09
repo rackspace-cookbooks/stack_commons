@@ -31,13 +31,13 @@ node.default[stackname][webserver]['sites'] = node.deep_fetch(stackname, 'demo',
 # set passwords dynamically...
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 node.default_unless['stack_commons']['cloud_monitoring']['agent_mysql']['password'] = secure_password
-if node['mysql']['server_root_password'] == 'ilikerandompasswords'
-  node.set['mysql']['server_root_password'] = secure_password
+if node['mysql-multi']['server_root_password'] == 'ilikerandompasswords'
+  node.set['mysql-multi']['server_root_password'] = secure_password
 end
 
 # Provide more verbose error when trying to install 5.6 on < Ubuntu 14.04
 if ubuntu_before_trusty? && node['mysql']['version']
-  if node['mysql']['version'] == '5.6'
+  if node['mysql-mutli']['server_version'] == '5.6'
     errmsg = "MySQL 5.6 isn't available on this platform. Please change version."
     Chef::Log.error(errmsg)
     fail errmsg
@@ -47,14 +47,14 @@ end
 include_recipe 'build-essential'
 include_recipe 'mysql-multi'
 mysql2_chef_gem 'default' do
-  client_version node['mysql']['version'] if node['mysql']
+  client_version node['mysql-multi']['server_version'] if node['mysql']
   action :install
 end
 
 connection_info = {
   host: 'localhost',
   username: 'root',
-  password: node['mysql']['server_root_password']
+  password: node['mysql-multi']['server_root_password']
 }
 
 # add holland user (if holland is enabled)
@@ -79,7 +79,7 @@ end
 # allow the app nodes to connect to mysql
 search_add_iptables_rules(
   "tags:#{stackname.gsub('stack', '')}_app_node AND chef_environment:#{node.chef_environment}",
-  'INPUT', "-p tcp --dport #{node['mysql']['port']} -j ACCEPT",
+  'INPUT', "-p tcp --dport #{node['mysql-multi']['service_port']} -j ACCEPT",
   9998,
   'allow app nodes to connect to mysql')
 

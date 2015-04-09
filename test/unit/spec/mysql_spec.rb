@@ -14,7 +14,7 @@ describe 'stack_commons::mysql' do
           let(:chef_run) do
             ChefSpec::ServerRunner.new(platform: platform, version: version, log_level: LOG_LEVEL) do |node, server|
               node_resources(node)
-              node.set['mysql']['version'] = '5.6'
+              node.set['mysql-multi']['server_version'] = '5.6'
             end.converge('stack_commons::mysql_base')
           end
 

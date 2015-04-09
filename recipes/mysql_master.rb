@@ -22,5 +22,5 @@ include_recipe 'mysql-multi::mysql_master'
 
 node['mysql-multi']['slaves'].each do |slave|
   next if slave.nil?
-  add_iptables_rule('INPUT', "-p tcp --dport #{node['mysql']['port']} -s #{slave} -j ACCEPT", 9243, 'allow slaves to connect to master')
+  add_iptables_rule('INPUT', "-p tcp --dport #{node['mysql-multi']['service_port']} -s #{slave} -j ACCEPT", 9243, 'allow slaves to connect to master')
 end
