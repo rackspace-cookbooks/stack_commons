@@ -3,6 +3,11 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+2.0.0
+------
+- Removed all pinning for MySQL and MySQL related services (ie databases, mutli)
+  This version is only designed for new customers and is not backwards compatible
+
 0.0.46
 ------
 - @martinb3 - Remove python workarounds
