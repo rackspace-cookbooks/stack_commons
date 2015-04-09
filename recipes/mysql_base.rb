@@ -45,8 +45,6 @@ if ubuntu_before_trusty? && node['mysql']['version']
 end
 
 include_recipe 'build-essential'
-include_recipe 'mysql::server'
-include_recipe 'mysql::client'
 include_recipe 'mysql-multi'
 mysql2_chef_gem 'default' do
   client_version node['mysql']['version'] if node['mysql']

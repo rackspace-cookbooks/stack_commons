@@ -18,7 +18,6 @@
 # limitations under the License.
 #
 
-include_recipe 'stack_commons::mysql_base'
 include_recipe 'mysql-multi::mysql_master'
 
 node['mysql-multi']['slaves'].each do |slave|

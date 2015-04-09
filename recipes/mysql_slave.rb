@@ -18,7 +18,6 @@
 # limitations under the License.
 #
 
-include_recipe 'stack_commons::mysql_base'
 include_recipe 'mysql-multi::mysql_slave'
 
 add_iptables_rule('INPUT', "-p tcp --dport #{node['mysql']['port']} -s #{node['mysql-multi']['master']} -j ACCEPT", 9243, 'allow master to connect to slaves')
