@@ -51,6 +51,7 @@ suites:
 
 # Can be used as a quick way to test the python bugs on centos 6
 # https://github.com/rackspace-cookbooks/stack_commons/issues/85
+# -- we are now running stack_commons::python first in wrapper::default too
 #
 #  - name: python
 #    run_list:
