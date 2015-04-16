@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.47
+------
+- @martinb3 - Add back python workarounds
+
 0.0.46
 ------
 - @martinb3 - Remove python workarounds
