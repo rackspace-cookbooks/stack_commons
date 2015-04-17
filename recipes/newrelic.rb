@@ -24,8 +24,8 @@ stackname = node['stack_commons']['stackname']
 # The node['newrelic']['license'] attribute needs to be set for NewRelic to work
 if node['newrelic']['license']
   node.set[stackname]['newrelic']['application_monitoring'] = 'true'
-  node.override['newrelic']['application_monitoring']['daemon']['ssl'] = true
-  node.override['newrelic']['server_monitoring']['ssl'] = true
+  node.override['newrelic']['application_monitoring']['daemon']['ssl'] = 'true'
+  node.override['newrelic']['server_monitoring']['ssl'] = 'true'
   node.default['newrelic_meetme_plugin']['license'] = node['newrelic']['license']
 
   # required by newrelic base agent
