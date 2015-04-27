@@ -3,6 +3,10 @@ stack_commons CHANGELOG
 
 This file is used to list changes made in each version of the stack_commons cookbook.
 
+0.0.50
+------
+- Major release of upstream rabbitmq cookbook broke us; pinning back until we can fix compat.
+
 0.0.49
 ------
 - Use 'true' not `true`, for NewRelic upstream cookbook, RE: https://github.com/escapestudios-cookbooks/newrelic/issues/175
